@@ -1,0 +1,1729 @@
+<!--
+  AMYCarousel v1.0.0
+  Copyright (c) 2025 Amigatronic — https://www.amigatronic.com
+  Licensed under the MIT License
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+-->
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>AMYCarousel — Amigatronic</title><style>:root{--bg:#0d0d0f;--s1:#17171a;--s2:#1f1f24;--bd:#2e2e36;--acc:#e8a020;--acc2:#c47010;--txt:#e8e8ec;--mut:#888899;--red:#c0392b;--grn:#27ae60;--r:7px;--mono:'Courier New',monospace}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;overflow:hidden}body{background:var(--bg);color:var(--txt);font-family:'Trebuchet MS',sans-serif;font-size:16px;display:flex;flex-direction:column}header{background:var(--s1);border-bottom:2px solid var(--acc);padding:14px 22px;display:flex;align-items:center;gap:12px;flex-shrink:0;z-index:200}h1{font-size:24px;font-weight:700;letter-spacing:1px}h1 span{color:var(--acc)}.workspace{display:flex;flex:1;overflow:hidden}.pl{width:480px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid var(--bd);overflow-y:auto;background:var(--s1)}.pl-body{padding:12px;display:flex;flex-direction:column;gap:10px}.pc{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#0a0a0a}.pc-top{background:var(--s1);border-bottom:1px solid var(--bd);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0}.pc-top h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--acc);font-family:var(--mono)}.pc-top .dim-info{font-family:var(--mono);font-size:15px;color:var(--mut)}.pc-top .layout-badge{font-size:13px;letter-spacing:.5px;text-transform:uppercase;font-family:var(--mono);padding:2px 7px;border-radius:10px}.lb-h{background:#1a2a10;color:#8fc;border:1px solid #3a5a20}.lb-v{background:#10202a;color:#8cf;border:1px solid #205a7a}.lb-n{background:#2a1a10;color:#fc8;border:1px solid #5a3a20}.iframe-outer{flex:1;display:flex;align-items:center;justify-content:center;overflow:auto;padding:20px}.checker{background-image:repeating-conic-gradient(#181818 0% 25%,#121212 0% 50%);background-size:18px 18px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:6px}#liveFrame{border:none;display:block;box-shadow:0 4px 28px rgba(0,0,0,.7);border-radius:4px;overflow:hidden;transition:width .2s,height .2s}.pr{width:360px;flex-shrink:0;display:flex;flex-direction:column;border-left:1px solid var(--bd);overflow-y:auto;background:var(--s1)}.sec{border-bottom:1px solid var(--bd)}.sec-hd{padding:14px 18px;font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--acc);font-family:var(--mono);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;gap:8px}.sec-hd:hover{background:var(--s2)}.sec-hd .arr{transition:transform .2s;font-size:22px;line-height:1;flex-shrink:0}.sec-body{padding:14px 18px;display:none}.sec.open .sec-body{display:block}.sec.open .arr{transform:rotate(180deg)}.flash{border-left:3px solid var(--acc);padding:12px 16px;font-size:15px;border-radius:0 var(--r) var(--r) 0;background:var(--s2);margin-bottom:8px}.flash.ok{border-color:var(--grn)}.flash.err{border-color:var(--red)}label.lbl{display:block;font-size:13px;color:var(--mut);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase}input[type=text],textarea{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--txt);padding:10px 13px;border-radius:var(--r);font-size:14px;font-family:inherit;transition:border-color .2s}input[type=text]:focus,textarea:focus{outline:none;border-color:var(--acc)}#sDirection{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--txt);padding:8px 10px;border-radius:var(--r);font-size:14px;font-family:inherit}#sDirection:focus{outline:none;border-color:var(--acc)}textarea{resize:vertical;min-height:46px}.frow{margin-bottom:7px}.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);border:none;cursor:pointer;font-size:14px;font-weight:600;letter-spacing:.3px;transition:opacity .15s,transform .1s;text-decoration:none;white-space:nowrap;font-family:inherit}.btn:hover{opacity:.8}.btn:active{transform:scale(.97)}.btn-p{background:var(--acc);color:#000}.btn-d{background:var(--red);color:#fff}.btn-g{background:var(--s2);color:var(--txt);border:1px solid var(--bd)}.btn-sm{padding:6px 12px;font-size:12px}.btn-gen{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#000;font-size:16px;padding:14px 0;border-radius:var(--r);border:none;cursor:pointer;font-weight:800;letter-spacing:1px;width:100%;margin-top:6px;font-family:inherit;transition:opacity .2s}.btn-gen:hover{opacity:.87}.btn-copy{background:var(--s2);color:var(--txt);border:1px solid var(--bd);font-size:15px;padding:12px 0;border-radius:var(--r);border:none;cursor:pointer;font-weight:700;width:100%;margin-top:6px;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}.btn-copy:hover{border-color:var(--acc);color:var(--acc)}.btn-copy.copied{background:var(--grn);color:#fff;border-color:var(--grn)}.btn-row{display:flex;gap:6px;margin-top:6px}.plist{display:flex;flex-direction:column;gap:5px}.prow{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);display:grid;grid-template-columns:22px 50px 1fr auto;align-items:center;gap:9px;padding:9px 12px;cursor:grab;transition:border-color .2s}.prow:hover{border-color:var(--acc)}.prow.editing{border-color:var(--acc);background:#191910}.prow.dragging{opacity:.3;border-style:dashed}.prow.drag-over{border-color:var(--acc);background:#1d1d0f}.drag-h{color:var(--mut);font-size:20px;cursor:grab;user-select:none;text-align:center}.pthumb{width:48px;height:48px;object-fit:contain;border-radius:4px;background:var(--bg)}.pthumb-ph{width:48px;height:48px;background:var(--bg);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:20px}.pinfo .palt{font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.5px}.pinfo .ptxt{font-size:13px;color:var(--mut);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}.pact{display:flex;gap:3px;flex-shrink:0}.badge{background:var(--acc);color:#000;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;font-family:var(--mono)}.save-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;flex-shrink:0}.save-saving{color:var(--acc)}.save-saving .save-dot{background:var(--acc);animation:savePulse .8s infinite alternate}.save-ok{color:#27ae60}.save-ok .save-dot{background:#27ae60}.save-err{color:var(--red)}.save-err .save-dot{background:var(--red)}@keyframes savePulse{from{opacity:.3}to{opacity:1}}.prev-wrap{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}#imgPrev{width:64px;height:64px;flex-shrink:0;border-radius:5px;background:var(--bg);border:1px dashed var(--bd);display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:20px;overflow:hidden;object-fit:contain}.slider-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}.sl-lbl{font-size:14px;color:var(--mut);width:18px;flex-shrink:0;font-weight:700;font-family:var(--mono);text-align:right}input[type=range]{flex:1;accent-color:var(--acc);cursor:pointer;height:6px}.sl-val{font-family:var(--mono);font-size:15px;color:var(--acc);width:44px;text-align:right;flex-shrink:0}.presets{display:flex;flex-wrap:wrap;gap:3px;margin-top:7px}.preset{background:var(--s2);border:1px solid var(--bd);color:var(--mut);font-size:11px;font-family:var(--mono);padding:5px 8px;border-radius:4px;cursor:pointer;transition:all .15s;text-align:center;line-height:1.4;user-select:none}.preset:hover{border-color:var(--acc);color:var(--acc)}.preset.active{border-color:var(--acc);background:var(--acc);color:#000}.dim-box{display:flex;align-items:center;gap:8px;margin:8px 0 4px}.dim-rect{border:1px solid var(--acc2);border-radius:3px;background:linear-gradient(135deg,#1c1c1c,#111);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:var(--acc2);transition:width .15s,height .15s}.color-grid{display:flex;flex-direction:column;gap:5px}.color-row{display:flex;align-items:center;gap:7px}.color-row .color-lbl{font-size:15px;color:var(--txt);flex:1}input[type=color]{width:44px;height:32px;padding:2px;border:1px solid var(--bd);border-radius:4px;background:var(--bg);cursor:pointer;flex-shrink:0}.hex-in{width:88px!important;flex-shrink:0;font-family:var(--mono);font-size:13px}.toggle{position:relative;width:44px;height:24px;flex-shrink:0}.toggle input{opacity:0;width:0;height:0;position:absolute}.tsl{position:absolute;inset:0;background:#2a2a30;border-radius:24px;cursor:pointer;transition:background .25s}.tsl::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#888;border-radius:50%;transition:transform .25s,background .25s}.toggle input:checked+.tsl{background:var(--acc2)}.toggle input:checked+.tsl::before{transform:translateX(20px);background:#fff}.flag-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;gap:10px}.flag-lbl{font-size:15px;color:var(--txt);flex:1}.lang-btns{display:flex;gap:4px;margin-left:auto}.lang-btn{background:var(--s2);border:1px solid var(--bd);color:var(--mut);font-size:12px;font-family:var(--mono);font-weight:700;padding:4px 10px;border-radius:5px;cursor:pointer;transition:all .15s;letter-spacing:1px}.lang-btn:hover{border-color:var(--acc);color:var(--acc)}.lang-btn.active{background:var(--acc);color:#000;border-color:var(--acc)}.lang-ed-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;align-items:center}.lang-ed-key{font-family:var(--mono);font-size:11px;color:var(--mut);word-break:break-all}.lang-ed-input{background:var(--bg);border:1px solid var(--bd);color:var(--txt);padding:5px 8px;border-radius:5px;font-size:12px;font-family:inherit;width:100%}.lang-ed-input:focus{outline:none;border-color:var(--acc)}.lang-section-hd{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--acc2);font-family:var(--mono);margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--bd)}::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}::-webkit-scrollbar-thumb:hover{background:var(--acc2)}.drag-h{background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzY2NiI+PGNpcmNsZSBjeD0iOSIgY3k9IjYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iNiIgcj0iMS41Ii8+PGNpcmNsZSBjeD0iOSIgY3k9IjEyIiByPSIxLjUiLz48Y2lyY2xlIGN4PSIxNSIgY3k9IjEyIiByPSIxLjUiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMTgiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTgiIHI9IjEuNSIvPjwvc3ZnPg==') no-repeat center/18px;color:transparent!important;width:22px;height:22px;}.btn-edit-ico{background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZThhMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE3IDNhMi44MjggMi44MjggMCAxIDEgNCA0TDcuNSAyMC41IDIgMjJsMS41LTUuNUwxNyAzeiIvPjwvc3ZnPg==') no-repeat center/18px var(--s2);border:1px solid var(--bd);width:34px;height:34px;padding:0;border-radius:var(--r);}.btn-del-ico{background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPjxwb2x5bGluZSBwb2ludHM9IjMgNiA1IDYgMjEgNiIvPjxwYXRoIGQ9Ik0xOSA2djE0YTIgMiAwIDAgMS0yIDJIN2EyIDIgMCAwIDEtMi0yVjYiLz48cGF0aCBkPSJNOCA2VjRhMiAyIDAgMCAxIDItMmg0YTIgMiAwIDAgMSAyIDJ2MiIvPjwvc3ZnPg==') no-repeat center/14px var(--red);border:none;width:34px;height:34px;padding:0;border-radius:var(--r);}#imgPrevPh{background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjEuNSI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxjaXJjbGUgY3g9IjguNSIgY3k9IjguNSIgcj0iMS41Ii8+PHBvbHlsaW5lIHBvaW50cz0iMjEgMTUgMTYgMTAgNSAyMSIvPjwvc3ZnPg==') no-repeat center/32px var(--bg)!important;font-size:0!important;}.hdr-logo{height:36px;width:36px;object-fit:contain;border-radius:6px;transition:transform .25s,filter .25s;cursor:pointer;display:block;flex-shrink:0}.hdr-logo-link{display:inline-flex;line-height:0;flex-shrink:0}.hdr-logo:hover{transform:scale(1.12);filter:drop-shadow(0 0 6px rgba(232,160,32,.7))}.hdr-brand{display:flex;align-items:center;gap:8px;text-decoration:none;margin-left:4px}.hdr-brand:hover{opacity:.85}.hdr-brand-text{font-size:13px;color:var(--mut);font-family:var(--mono);transition:color .2s}.hdr-brand:hover .hdr-brand-text{color:var(--acc)}.donate-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.donate-btn{display:flex;align-items:center;justify-content:center;width:44px;height:28px;border-radius:6px;border:1px solid var(--bd);background:var(--s2);cursor:pointer;text-decoration:none;transition:transform .2s,border-color .2s;padding:4px}.donate-btn:hover{transform:scale(1.1);border-color:var(--acc)}.donate-btn img{width:100%;height:100%;object-fit:contain}.donate-label{font-size:11px;color:var(--mut);margin-bottom:6px}
+/* ── Inline help tooltip system ── */
+.help-icon{display:inline-flex;align-items:center;justify-content:center;
+  width:15px;height:15px;border-radius:50%;background:rgba(232,160,32,.18);
+  color:var(--acc);font-size:10px;font-weight:700;cursor:help;flex-shrink:0;
+  border:1px solid rgba(232,160,32,.3);margin-left:5px;line-height:1;
+  vertical-align:middle;transition:background .2s}
+.help-icon:hover{background:rgba(232,160,32,.35)}
+.tooltip-box{position:fixed;z-index:9999;max-width:280px;background:#1a1a1e;
+  border:1px solid var(--acc2);border-radius:8px;padding:10px 13px;
+  font-size:12px;color:var(--txt);line-height:1.5;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.6);opacity:0;transform:translateY(4px);
+  transition:opacity .18s,transform .18s;font-family:'Trebuchet MS',sans-serif}
+.tooltip-box.visible{opacity:1;transform:translateY(0)}
+.tooltip-box::before{content:'';position:absolute;top:-5px;left:14px;
+  width:8px;height:8px;background:#1a1a1e;border-left:1px solid var(--acc2);
+  border-top:1px solid var(--acc2);transform:rotate(45deg)}
+
+</style></head> <body> <header> <h1>AMY<span>Carousel</span></h1> <div class="hdr-brand"><a href="https://www.amigatronic.com" target="_blank" rel="noopener noreferrer" class="hdr-logo-link" aria-label="Visit Amigatronic website"><img src="data:image/png;base64,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" alt="Amigatronic" class="hdr-logo"></a><span class="hdr-brand-text">v1.0 &mdash; </span><a href="https://www.amigatronic.com" target="_blank" rel="noopener noreferrer" class="hdr-brand-text" aria-label="Visit Amigatronic website">Amigatronic</a></div> <div class="lang-btns"> <button class="lang-btn active" onclick="setLang('it')">IT</button> <button class="lang-btn" onclick="setLang('en')">EN</button> </div> <div id="saveStatus" style="margin-left:16px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:14px;color:var(--mut);opacity:0;transition:opacity .3s"></div> </header> <div class="workspace"> <!-- ══ LEFT ══ --> <div class="pl"> <div class="pl-body"> <div id="flashMsg" style="display:none"></div> <!-- Add/Edit --> <div class="sec" id="secAddEdit"> <div class="sec-hd" onclick="toggleSec(this)"> <span id="secAddEditTitle">＋ <span data-i18n="add_product">Aggiungi prodotto</span></span> <span class="arr">▾</span> </div> <div class="sec-body"> <input type="hidden" id="editIdx" value="-1"> <div class="prev-wrap"> <img id="imgPrev" src="" alt="" style="display:none"> <div id="imgPrevPh" style="width:64px;height:64px;flex-shrink:0;border-radius:5px;background:var(--bg);border:1px dashed var(--bd);display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:20px">🖼</div> <div style="flex:1"> <div class="frow"><label class="lbl" data-i18n="img_url"><span class="help-icon" data-help="help_img_url" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span>URL Immagine</label><input type="text" id="fImg" placeholder="https://example.com/image.jpg" oninput="refreshImgPrev(this.value)"></div> <div class="frow"><label class="lbl" data-i18n="link_url"><span class="help-icon" data-help="help_link_url" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span>URL Link prodotto</label><input type="text" id="fLink"></div> <div class="frow"><label class="lbl" data-i18n="redirect_url"><span class="help-icon" data-help="help_redirect_url" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span>URL Redirect (opzionale)</label><input type="text" id="fRedirect" placeholder="https://bit.ly/..."></div><p style="color:var(--mut);font-size:11px;margin:-4px 0 6px" data-i18n="redirect_hint">Se compilato sovrascrive il link diretto nel carosello</p><div class="frow"><label class="lbl" data-i18n="alt_name"><span class="help-icon" data-help="help_alt_name" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span>ALT / Nome breve</label><input type="text" id="fAlt" placeholder="AMYOPTYMOUSE"></div> <div class="frow"><label class="lbl" data-i18n="desc_text"><span class="help-icon" data-help="help_desc_text" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span>Testo descrittivo</label><textarea id="fText"></textarea></div> </div> </div> <div style="display:flex;gap:6px;align-items:center"> <button class="btn btn-p" onclick="submitProduct()" id="btnSubmit" data-i18n="btn_add">＋ Aggiungi</button> <button class="btn btn-g" id="btnCancelEdit" style="display:none" onclick="cancelEdit()" data-i18n="btn_cancel">✕ Annulla</button> </div> </div> </div> <!-- Products --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)"> 📦 <span data-i18n="products">Prodotti<span class="help-icon" data-help="help_products" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span>&nbsp;<span class="badge" id="prodBadge">0</span> <span class="arr" style="margin-left:auto">▾</span> </div> <div class="sec-body"> <div class="plist" id="productList"></div> <p style="color:var(--mut);font-size:11px;margin-top:6px" data-i18n="drag_hint">⠿ Trascina per riordinare</p> </div> </div> <!-- Export --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">⚡ <span data-i18n="export">Esporta<span class="help-icon" data-help="help_export" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <button class="btn-gen" onclick="downloadCarousel()" data-i18n="btn_download">⚡ Scarica carousel_output.html</button> <button class="btn-copy" id="copyBtn" onclick="copyHTML()" data-i18n="btn_copy">📋 Copia HTML negli appunti</button> <div class="btn-row" style="margin-top:10px"> <button class="btn btn-g" style="flex:1;justify-content:center" onclick="exportData()" data-i18n="btn_export_json">💾 Esporta JSON</button> <button class="btn btn-g" style="flex:1;justify-content:center" onclick="importDataElectron()" data-i18n="btn_import_json">📂 Importa JSON</button> <input type="file" id="importFile" accept=".json" style="display:none" onchange="importDataFile(this)"> </div> </div> </div> </div><!-- /pl-body --> </div><!-- /pl --> <!-- ══ CENTER ══ --> <div class="pc"> <div class="pc-top"> <h2>👁 <span data-i18n="live_preview">Preview live</span></h2> <span class="dim-info" id="dimInfo">280×400 px</span> <span class="layout-badge lb-v" id="layoutBadge" data-i18n="layout_v">Verticale</span> </div> <div class="iframe-outer"> <div class="checker"> <iframe id="liveFrame" width="280" height="460" title="Preview live" scrolling="no" frameborder="0"></iframe> </div> </div> </div> <!-- ══ RIGHT ══ --> <div class="pr" id="optionsPanel"> <!-- Dimensioni --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">📐 <span data-i18n="dimensions">Dimensioni<span class="help-icon" data-help="help_dimensions" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <div class="slider-row"> <span class="sl-lbl">W</span> <input type="range" id="sW" min="100" max="970" step="1" value="280" oninput="onSlider()"> <span class="sl-val" id="vW">280</span> </div> <div class="slider-row"> <span class="sl-lbl">H</span> <input type="range" id="sH" min="50" max="900" step="1" value="400" oninput="onSlider()"> <span class="sl-val" id="vH">400</span> </div> <div class="dim-box"> <div id="dimRect" class="dim-rect" style="width:40px;height:56px">280×400</div> </div> <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--mut);font-family:var(--mono);margin-bottom:4px" data-i18n="iab_presets">Preset IAB</div> <div class="presets" id="presetsContainer"></div> </div> </div> <!-- Speed --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">⏱ <span data-i18n="timing">Tempo per prodotto<span class="help-icon" data-help="help_timing" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <div class="slider-row"> <span class="sl-lbl">s</span> <input type="range" id="sSpeed" min="2" max="10" step="1" value="4" oninput="onSlider()"> <span class="sl-val" id="vSpeed">4sec</span> </div> <p style="color:var(--mut);font-size:11px;margin-top:4px" data-i18n="timing_hint">Secondi di permanenza per ciascun prodotto</p> <div class="frow" style="margin-top:10px"><label class="lbl" for="sDirection" data-i18n="slide_dir_lbl">Direzione</label><select id="sDirection" onchange="onSlider()"><option value="forward" data-i18n="dir_forward">Avanti (1 → N)</option><option value="backward" data-i18n="dir_backward">Indietro (N → 1)</option><option value="bounce" data-i18n="dir_bounce">Rimbalza (1 → N → 1)</option></select></div> </div> </div> <!-- Colors --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">🎨 <span data-i18n="colors">Colori<span class="help-icon" data-help="help_colors" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <div class="color-grid" id="colorGrid"></div> </div> </div> <!-- Title --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">🏷 <span data-i18n="title_sec">Titolo<span class="help-icon" data-help="help_title_sec" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <div class="flag-row" style="margin-bottom:8px"> <span class="flag-lbl" data-i18n="show_title">Mostra titolo</span> <label class="toggle"> <input type="checkbox" id="flag_show_title" data-flagkey="show_title" checked onchange="onFlag()"> <span class="tsl"></span> </label> </div> <div class="frow"> <label class="lbl" data-i18n="title_text_lbl">Testo titolo</label> <input type="text" id="title_text" value="The Amy Family" maxlength="80" oninput="scheduleRender();scheduleSave()"> </div> <div class="frow"> <label class="lbl" data-i18n="title_url_lbl">URL titolo</label> <input type="text" id="title_url" value="https://www.amigatronic.com" oninput="scheduleRender();scheduleSave()"> </div> </div> </div> <!-- Flag groups --> <div id="flagGroupsContainer"></div> <!-- Language editor --> <div class="sec" id="secLangEditor"> <div class="sec-hd" onclick="toggleSec(this)">🌐 <span data-i18n="lang_editor">Editor lingue<span class="help-icon" data-help="help_lang_editor" onmouseenter="showTooltip(this,event)" onmouseleave="hideTooltip()">?</span></span> <span class="arr">▾</span></div> <div class="sec-body"> <p style="color:var(--mut);font-size:12px;margin-bottom:10px" data-i18n="lang_editor_hint">Modifica le stringhe dell'interfaccia per ogni lingua. Le modifiche vengono salvate automaticamente.</p> <div style="display:flex;gap:6px;margin-bottom:12px"> <button class="btn btn-g btn-sm" onclick="showLangTab('it')" id="ledTabIt" style="font-weight:700">IT</button> <button class="btn btn-g btn-sm" onclick="showLangTab('en')" id="ledTabEn">EN</button> <button class="btn btn-g btn-sm" onclick="resetLang()" style="margin-left:auto" data-i18n="btn_reset_lang">↺ Reset</button> </div> <div id="langEditorContent"></div> </div> </div> <!-- About --> <div class="sec"> <div class="sec-hd" onclick="toggleSec(this)">ℹ️ About <span class="arr">▾</span></div> <div class="sec-body"> <table style="width:100%;font-size:13px;border-collapse:collapse"> <tr><td style="color:var(--mut);padding:4px 0;width:40%">App</td><td style="color:var(--txt);font-weight:700">AMYCarousel</td></tr> <tr><td style="color:var(--mut);padding:4px 0">Version</td><td style="color:var(--acc);font-family:var(--mono)">1.0.0</td></tr> <tr><td style="color:var(--mut);padding:4px 0">Build</td><td style="color:var(--txt);font-family:var(--mono)" id="aboutBuild">—</td></tr> <tr><td style="color:var(--mut);padding:4px 0">Author</td><td style="color:var(--txt)">Amigatronic</td></tr> <tr><td style="color:var(--mut);padding:4px 0">Web</td><td><a href="https://www.amigatronic.com" style="color:var(--acc)" target="_blank">amigatronic.com</a></td></tr> <tr><td style="color:var(--mut);padding:4px 0">Engine</td><td style="color:var(--txt)">Electron / HTML5</td></tr> <tr><td style="color:var(--mut);padding:4px 0">License</td><td style="color:var(--txt)">MIT</td></tr> </table> </div> </div> </div><!-- /pr --> </div><!-- /workspace --> <script>
+/* AMYCarousel v1.0.0 | MIT | (c) 2025 Amigatronic */
+var LANG_DEFAULTS = {
+  it: {
+    add_product: "Aggiungi prodotto",
+    img_url: "URL Immagine",
+    link_url: "URL Link prodotto",
+    alt_name: "ALT / Nome breve",
+    redirect_url: "URL Redirect (opzionale — shortener/tinyurl)",
+    redirect_hint: "Se compilato, il link del prodotto usa questo URL invece del link diretto",
+    desc_text: "Testo descrittivo",
+    btn_add: "＋ Aggiungi",
+    btn_cancel: "✕ Annulla",
+    btn_save_edit: "💾 Salva modifiche",
+    products: "Prodotti",
+    drag_hint: "⠿ Trascina per riordinare",
+    export: "Esporta",
+    btn_download: "⚡ Scarica carousel_output.html",
+    btn_copy: "📋 Copia HTML negli appunti",
+    btn_export_json: "💾 Esporta JSON",
+    btn_import_json: "📂 Importa JSON",
+    live_preview: "Preview live",
+    layout_v: "Verticale",
+    layout_h: "Orizzontale",
+    layout_n: "Stretto",
+    dimensions: "Dimensioni",
+    iab_presets: "Preset IAB",
+    timing: "Tempo per prodotto",
+    timing_hint: "Secondi di permanenza per ciascun prodotto",
+    slide_dir_lbl: "Direzione",
+    dir_forward: "Avanti (1 → N)",
+    dir_backward: "Indietro (N → 1)",
+    dir_bounce: "Rimbalza (1 → N → 1)",
+    colors: "Colori",
+    title_sec: "Titolo",
+    show_title: "Mostra titolo",
+    title_text_lbl: "Testo titolo",
+    title_url_lbl: "URL titolo",
+    lang_editor: "Editor lingue",
+    lang_editor_hint: "Modifica le stringhe dell'interfaccia per ogni lingua. Le modifiche vengono salvate automaticamente.",
+    btn_reset_lang: "↺ Reset",
+    saving: "Salvataggio…",
+    saved: "Salvato ✓",
+    color_bg1: "Sfondo (inizio)",
+    color_bg2: "Sfondo (fine)",
+    color_border: "Cornice",
+    color_accent: "Accento / evidenziato",
+    color_dot: "Pallini navigazione",
+    color_text: "Testo descrizione",
+    color_title: "Titolo",
+    color_progress: "Barra progresso",
+    color_hr: "Linea divisore",
+    color_wrap_bg: "Sfondo esterno (wrap)",
+    transparent: "Trasparente",
+    show_border: "Mostra cornice",
+    show_hr: "Mostra linea orizzontale in basso",
+    hover_zoom: "Zoom su hover",
+    slide_anim: "Animazione fade+scale",
+    vignette: "Vignette ai bordi",
+    scanlines: "Scanlines retro",
+    progress_bar: "Barra progresso",
+    pb_vu: "Barra VU meter (3 colori)",
+    dot_nav: "Pallini navigazione",
+    slide_counter: "Contatore X/N",
+    pause_icon: "Icona pausa",
+    name_highlight: "Nome prodotto evidenziato",
+    divider: "Separatore img/testo",
+    lazy_load: "Carica immagini solo quando visibili",
+    content_vis: "Ottimizza rendering (browser moderni)",
+    grp_aspect: "🖼 Aspetto",
+    grp_ui: "🖱 UI",
+    grp_text: "✍ Testo",
+    grp_perf: "⚙ Performance",
+    msg_added: "✅ Prodotto aggiunto.",
+    msg_updated: "✅ Aggiornato.",
+    msg_deleted: "🗑️ Eliminato.",
+    msg_required: "⚠️ Link, Immagine e Testo sono obbligatori.",
+    msg_imported: "✅ Dati importati correttamente.",
+    msg_invalid_json: "⚠️ File JSON non valido.",
+    msg_saved_path: "✅ Salvato in: ",
+    msg_exported: "✅ Esportato in: ",
+    msg_err: "⚠️ Errore: ",
+    msg_copied: "✅ Copiato!",
+    msg_copy_err: "⚠️ Errore copia",
+    confirm_delete: "Eliminare il prodotto?",
+
+    help_add_product: "Aggiungi un nuovo prodotto al carosello. Compila URL immagine, link e descrizione.",
+    help_img_url: "URL diretto dell'immagine del prodotto (jpg, png, webp). HTTPS obbligatorio; l'immagine deve essere accessibile pubblicamente.",
+    help_link_url: "URL della pagina prodotto che si aprirà quando l'utente clicca sull'immagine.",
+    help_redirect_url: "URL shortener opzionale (es. bit.ly). Se presente sovrascrive il link diretto nell'output. Utile per eBay/Ecwid.",
+    help_alt_name: "Nome breve del prodotto (testo ALT per accessibilità e nome in grassetto nel carosello).",
+    help_desc_text: "Descrizione completa. Formato consigliato: NOME - descrizione. Il testo prima del \" - \" viene evidenziato.",
+    help_products: "Lista prodotti nel carosello. Trascina le righe per riordinare. L'ordine determina la sequenza di rotazione.",
+    help_export: "Genera e scarica il codice HTML del carosello da inserire nella descrizione prodotto.",
+    help_dimensions: "Larghezza e altezza in pixel del banner. Usa i preset IAB per i formati standard.",
+    help_iab_presets: "Formati banner standard IAB. Clic per applicare le dimensioni. Il layout cambia automaticamente in base alle proporzioni.",
+    help_timing: "Quanti secondi ogni prodotto rimane visibile prima di passare al successivo.",
+    help_colors: "Personalizza tutti i colori del carosello. Il colore accent influenza bordi, testi evidenziati e pallini.",
+    help_color_wrap: "Colore dello sfondo esterno al carosello. Usa \"Trasparente\" se il sito ha già un proprio sfondo.",
+    help_title_sec: "Titolo visualizzato sopra il carosello con link cliccabile. Può essere disattivato.",
+    help_show_border: "Attiva il bordo decorativo attorno al carosello con effetto gradiente.",
+    help_show_hr: "Mostra una linea orizzontale sotto il carosello come separatore.",
+    help_hover_zoom: "L'immagine si ingrandisce leggermente quando il mouse ci passa sopra.",
+    help_slide_anim: "Aggiunge un effetto di scala e traslazione alla transizione tra slide.",
+    help_vignette: "Aggiunge un alone scuro ai bordi del carosello per effetto cinematografico.",
+    help_scanlines: "Sovrappone linee orizzontali sottili per un effetto retrò stile monitor CRT.",
+    help_progress_bar: "Mostra una barra colorata in basso che indica il progresso della slide corrente.",
+    help_pb_vu: "Modalità VU meter: la barra cambia colore da verde a giallo a rosso man mano che si riempie.",
+    help_dot_nav: "Pallini indicatori in basso che mostrano quale slide è attiva.",
+    help_slide_counter: "Mostra il numero della slide corrente in alto a destra (es. 3 / 13).",
+    help_pause_icon: "Mostra un'icona ⏸ in basso a destra quando il mouse è sul carosello.",
+    help_name_highlight: "Il nome del prodotto (prima del \" - \") viene mostrato in grassetto con il colore accent.",
+    help_divider: "Una linea decorativa separa l'immagine dal testo nella slide.",
+    help_lazy_load: "Le immagini vengono caricate solo quando il carosello entra nel viewport. Migliora le prestazioni.",
+    help_content_vis: "Ottimizzazione rendering per browser moderni. Ha effetto solo su Chrome/Edge recenti.",
+    help_lang_editor: "Modifica tutte le stringhe dell'interfaccia per ogni lingua. Le modifiche si salvano automaticamente.",
+    help_about: "Informazioni sull'applicazione. Versione, licenza e link al sito Amigatronic."
+  },
+  en: {
+    add_product: "Add product",
+    img_url: "Image URL",
+    link_url: "Product link URL",
+    alt_name: "ALT / Short name",
+    redirect_url: "Redirect URL (optional — shortener/tinyurl)",
+    redirect_hint: "If set, the product link uses this URL instead of the direct link",
+    desc_text: "Descriptive text",
+    btn_add: "＋ Add",
+    btn_cancel: "✕ Cancel",
+    btn_save_edit: "💾 Save changes",
+    products: "Products",
+    drag_hint: "⠿ Drag to reorder",
+    export: "Export",
+    btn_download: "⚡ Download carousel_output.html",
+    btn_copy: "📋 Copy HTML to clipboard",
+    btn_export_json: "💾 Export JSON",
+    btn_import_json: "📂 Import JSON",
+    live_preview: "Live preview",
+    layout_v: "Vertical",
+    layout_h: "Horizontal",
+    layout_n: "Narrow",
+    dimensions: "Dimensions",
+    iab_presets: "IAB Presets",
+    timing: "Time per product",
+    timing_hint: "Seconds each product stays on screen",
+    slide_dir_lbl: "Direction",
+    dir_forward: "Forward (1 → N)",
+    dir_backward: "Backward (N → 1)",
+    dir_bounce: "Bounce (1 → N → 1)",
+    colors: "Colors",
+    title_sec: "Title",
+    show_title: "Show title",
+    title_text_lbl: "Title text",
+    title_url_lbl: "Title URL",
+    lang_editor: "Language editor",
+    lang_editor_hint: "Edit interface strings for each language. Changes are saved automatically.",
+    btn_reset_lang: "↺ Reset",
+    saving: "Saving…",
+    saved: "Saved ✓",
+    color_bg1: "Background (start)",
+    color_bg2: "Background (end)",
+    color_border: "Border",
+    color_accent: "Accent / highlighted",
+    color_dot: "Navigation dots",
+    color_text: "Description text",
+    color_title: "Title",
+    color_progress: "Progress bar",
+    color_hr: "Divider line",
+    color_wrap_bg: "Outer background (wrap)",
+    transparent: "Transparent",
+    show_border: "Show border",
+    show_hr: "Show bottom horizontal line",
+    hover_zoom: "Zoom on hover",
+    slide_anim: "Slide animation (fade+scale)",
+    vignette: "Dark vignette on edges",
+    scanlines: "Retro scanlines",
+    progress_bar: "Progress bar",
+    pb_vu: "VU meter bar (3 colors)",
+    dot_nav: "Dot navigation",
+    slide_counter: "Slide counter X/N",
+    pause_icon: "Pause icon on hover",
+    name_highlight: "Highlighted product name",
+    divider: "Image/text divider",
+    lazy_load: "Load images only when visible",
+    content_vis: "Optimize rendering (modern browsers)",
+    grp_aspect: "🖼 Appearance",
+    grp_ui: "🖱 UI",
+    grp_text: "✍ Text",
+    grp_perf: "⚙ Performance",
+    msg_added: "✅ Product added.",
+    msg_updated: "✅ Updated.",
+    msg_deleted: "🗑️ Deleted.",
+    msg_required: "⚠️ Link, Image and Text are required.",
+    msg_imported: "✅ Data imported successfully.",
+    msg_invalid_json: "⚠️ Invalid JSON file.",
+    msg_saved_path: "✅ Saved to: ",
+    msg_exported: "✅ Exported to: ",
+    msg_err: "⚠️ Error: ",
+    msg_copied: "✅ Copied!",
+    msg_copy_err: "⚠️ Copy error",
+    confirm_delete: "Delete this product?",
+
+    help_add_product: "Add a new product to the carousel. Fill in image URL, link and description.",
+    help_img_url: "Direct URL of the product image (jpg, png, webp). HTTPS is required; the image must be publicly accessible.",
+    help_link_url: "URL of the product page that opens when the user clicks the image.",
+    help_redirect_url: "Optional shortener URL (e.g. bit.ly). If set, overrides the direct link in output. Useful for eBay/Ecwid.",
+    help_alt_name: "Short product name (ALT text for accessibility and bold name in the carousel).",
+    help_desc_text: "Full description. Recommended format: NAME - description. Text before \" - \" is highlighted.",
+    help_products: "Product list in the carousel. Drag rows to reorder. Order determines rotation sequence.",
+    help_export: "Generate and download the carousel HTML code to insert in the product description.",
+    help_dimensions: "Banner width and height in pixels. Use IAB presets for standard formats.",
+    help_iab_presets: "Standard IAB banner formats. Click to apply dimensions. Layout changes automatically based on proportions.",
+    help_timing: "How many seconds each product stays visible before switching to the next.",
+    help_colors: "Customize all carousel colors. Accent color affects borders, highlighted text and dots.",
+    help_color_wrap: "Background color outside the carousel. Use \"Transparent\" if the site already has its own background.",
+    help_title_sec: "Title shown above the carousel with a clickable link. Can be disabled.",
+    help_show_border: "Enable a decorative gradient border around the carousel.",
+    help_show_hr: "Show a horizontal line below the carousel as a separator.",
+    help_hover_zoom: "The image slightly enlarges when the mouse hovers over it.",
+    help_slide_anim: "Adds a scale and translation effect to the transition between slides.",
+    help_vignette: "Adds a dark halo to the carousel edges for a cinematic effect.",
+    help_scanlines: "Overlays thin horizontal lines for a retro CRT monitor effect.",
+    help_progress_bar: "Shows a colored bar at the bottom indicating the current slide progress.",
+    help_pb_vu: "VU meter mode: the bar changes color from green to yellow to red as it fills.",
+    help_dot_nav: "Indicator dots at the bottom showing which slide is active.",
+    help_slide_counter: "Shows the current slide number top right (e.g. 3 / 13).",
+    help_pause_icon: "Shows a ⏸ icon bottom right when the mouse is over the carousel.",
+    help_name_highlight: "The product name (before \" - \") is shown bold with the accent color.",
+    help_divider: "A decorative line separates the image from the text in the slide.",
+    help_lazy_load: "Images load only when the carousel enters the viewport. Improves performance.",
+    help_content_vis: "Rendering optimization for modern browsers. Only effective on recent Chrome/Edge.",
+    help_lang_editor: "Edit all interface strings for each language. Changes are saved automatically.",
+    help_about: "Application information. Version, license and link to the Amigatronic website."
+  }
+};
+var LS_PRODUCTS = "amy_products";
+var LS_FLAGS = "amy_flags";
+var LS_LANG = "amy_lang";
+var LS_STRINGS = "amy_strings";
+var APP_VERSION = "1.0.0";
+var APP_BUILD = new Date().toISOString().slice(0, 10);
+var DEFAULTS = {
+  banner_w: 280,
+  banner_h: 400,
+  slide_speed: 4,
+  slide_dir: "forward",
+  color_bg1: "#1c1c1c",
+  color_bg2: "#111111",
+  color_border: "#c47010",
+  color_accent: "#e8a020",
+  color_dot: "#e8a020",
+  color_text: "#d4d4d8",
+  color_title: "#c47010",
+  color_progress: "#c47010",
+  color_hr: "#2e2e36",
+  color_wrap_bg: "transparent",
+  show_title: true,
+  show_border: true,
+  show_hr: true,
+  pb_vu: true,
+  title_text: "The Amy Family",
+  title_url: "https://www.amigatronic.com",
+  hover_zoom: true,
+  slide_anim: true,
+  progress_bar: true,
+  dot_nav: true,
+  slide_counter: true,
+  pause_icon: true,
+  vignette: false,
+  scanlines: false,
+  name_highlight: true,
+  divider: true,
+  lazy_load: true,
+  content_vis: false
+};
+var DEFAULT_PRODUCTS = [{
+  link: "https://lectronz.com/products/amyoptymouse-a-400-dpi-amiga-optical-mouse",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4744867273.jpg",
+  alt: "AMYOPTYMOUSE",
+  text: "AMYOPTYMOUSE - A 400-dpi Amiga Optical Mouse for Precision and Performance"
+}, {
+  link: "https://shorturl.at/jkszi",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4848413372.jpg",
+  alt: "AMYUSB2SERIAL",
+  text: "AMYUSB2SERIAL - An Amiga USB <> Serial Adapter"
+}, {
+  link: "https://amigatronic.com/AMYA500Z2-An-Amiga-500-and-Plus-Zorro-II-Expansion-Adapter-p531711029",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4593525392.jpg",
+  alt: "AMYA500Z2",
+  text: "AMYA500Z2 - An Amiga 500 (and Plus) Zorro II Expansion Adapter"
+}, {
+  link: "https://amigatronic.com/AMY501-A-512kB-Memory-Expansion-A501-Replacement-p531774512",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4328683992.jpg",
+  alt: "AMY501",
+  text: "AMY501 - A 512kB Memory Expansion - A501 Replacement"
+}, {
+  link: "https://amigatronic.com/AMY501-PLUS-K-An-Amiga-500-Plus-and-Classic-512k-1MB-RAM-Expansion-p694458192",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4531971162.jpg",
+  alt: "AMY501 PLUS 'K'",
+  text: "AMY501 PLUS 'K' - An Amiga 500 Plus and Classic 512k 1MB RAM Expansion"
+}, {
+  link: "https://amigatronic.com/AMYA600LED-A-RGB-Programmable-Commodore-Amiga-600-3x-LED-Replacement-A600-PCB-p703478040",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4597492600.webp",
+  alt: "AMYA600LED",
+  text: "AMYA600LED - A RGB Programmable Commodore Amiga 600 3x LED Replacement A600 PCB"
+}, {
+  link: "https://amigatronic.com/AMYAKABAT-An-upgrade-of-a-Ni-Cd-Battery-to-a-Leak-Free-CR2032-Lithium-p541934523",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/3528714033.jpg",
+  alt: "AMYAKABAT",
+  text: "AMYAKABAT - An upgrade of a Ni-Cd Battery to a Leak-Free CR2032 Lithium"
+}, {
+  link: "https://amigatronic.com/AMYATX-ALL-IN-ONE-The-Ultimate-ATX-Power-Supply-Converter-for-Reviving-Amiga-Computers-p531706528",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4542564527.jpg",
+  alt: "AMYATX ALL-IN-ONE",
+  text: "AMYATX ALL-IN-ONE - The Ultimate ATX Power Supply Converter for Reviving Amiga Computers"
+}, {
+  link: "https://www.tindie.com/products/33827/",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4550425649.webp",
+  alt: "AMYATXA2000 Plus",
+  text: "AMYATXA2000 Plus - ATX Power Adapter for Amiga 1500 and 2000"
+}, {
+  link: "https://amigatronic.com/AMYATXA500-An-ATX-PC-power-adapter-for-the-Amiga-500-600-1200-p531713275",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4899951926.jpg",
+  alt: "AMYATXA500",
+  text: "AMYATXA500 - An ATX PC power adapter for the Amiga 500 600 1200"
+}, {
+  link: "https://amigatronic.com/AMYVIDHYBRID-A-Modern-Replacement-for-Commodore-390229-03-Amiga-Video-Hybrid-RGB-DAC-p729274473",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4789786396.jpg",
+  alt: "AMYVIDHYBRID+",
+  text: "AMYVIDHYBRID+ A Modern Replacement for Commodore 390229-03 Amiga Video Hybrid RGB DAC"
+}, {
+  link: "https://amigatronic.com/AMYVIDHYBRID-FBAS-A-Modern-Replacement-for-Commodore-390229-03-Amiga-Video-Hybrid-RGB-DAC-&-PAL-NTSC-Converter-p734297055",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4818751898.jpg",
+  alt: "AMYVIDHYBRID+FBAS",
+  text: "AMYVIDHYBRID+FBAS - A Modern Replacement for Commodore 390229-03 Amiga Video Hybrid RGB DAC & PAL NTSC Converter"
+}, {
+  link: "https://amigatronic.com/AMYRGB2SCART-RGB-cable-for-Commodore-Amiga-p531705033",
+  img: "https://d2j6dbq0eux0bg.cloudfront.net/images/13798496/4430024596.jpg",
+  alt: "AMYRGB2SCART",
+  text: "AMYRGB2SCART - RGB cable for Commodore Amiga"
+}];
+var IAB_PRESETS = {
+  "Med.Rect": [300, 250],
+  "Lg.Rect": [336, 280],
+  "Half Page": [300, 600],
+  Skyscraper: [160, 600],
+  Square: [250, 250],
+  "Sm.Square": [200, 200],
+  Leaderboard: [728, 90],
+  Billboard: [970, 250],
+  Netboard: [580, 400],
+  "Lg.Mobile": [320, 100],
+  "Mob.Banner": [320, 50]
+};
+var COLOR_KEYS = ["color_bg1", "color_bg2", "color_border", "color_accent", "color_dot", "color_text", "color_title", "color_progress", "color_hr"];
+var FLAG_GROUPS = [["grp_aspect", {
+  show_border: 1,
+  show_hr: 1,
+  hover_zoom: 1,
+  slide_anim: 1,
+  vignette: 1,
+  scanlines: 1
+}], ["grp_ui", {
+  progress_bar: 1,
+  pb_vu: 1,
+  dot_nav: 1,
+  slide_counter: 1,
+  pause_icon: 1
+}], ["grp_text", {
+  name_highlight: 1,
+  divider: 1
+}], ["grp_perf", {
+  lazy_load: 1,
+  content_vis: 1
+}]];
+var currentLang = "en";
+var customStrings = {
+  it: {},
+  en: {}
+};
+// Translate a key using custom strings, then defaults
+function t(key) {
+  return customStrings[currentLang] && customStrings[currentLang][key] || LANG_DEFAULTS[currentLang][key] || LANG_DEFAULTS.it[key] || key;
+}
+// Apply translations to all [data-i18n] elements
+function applyI18n() {
+  document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    var value = el.getAttribute("data-i18n");
+    var tmp = t(value);
+    if (el.tagName === "INPUT" && el.type !== "checkbox") {
+      el.placeholder = tmp;
+    } else {
+      el.textContent = tmp;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll(".lang-btn").forEach(function (el) {
+    el.classList.toggle("active", el.textContent.trim().toLowerCase() === currentLang);
+  });
+}
+// Switch UI language and rebuild dynamic UI parts
+function setLang(lang) {
+  currentLang = lang;
+  try {
+    localStorage.setItem(LS_LANG, lang);
+  } catch (err) {}
+  applyI18n();
+  buildColorGrid();
+  buildFlagGroups();
+  buildProductList();
+  buildLangEditor();
+  addHelpIconsToDynamic();
+  var layoutBadgeEl = document.getElementById("layoutBadge");
+  if (layoutBadgeEl) {
+    var tmp = layoutBadgeEl.classList.contains("lb-h");
+    var tmp2 = layoutBadgeEl.classList.contains("lb-n");
+    layoutBadgeEl.textContent = tmp ? t("layout_h") : tmp2 ? t("layout_n") : t("layout_v");
+  }
+}
+var PRODUCTS = [];
+var cfg = {};
+// Validate external URLs before using them in generated HTML.
+function normalizeHttpUrl(value) {
+  var raw = typeof value === "string" ? value.trim() : "";
+  if (!raw) return "";
+  try {
+    var parsed = new URL(raw);
+    if ((parsed.protocol !== "https:" && parsed.protocol !== "http:") || parsed.username || parsed.password) {
+      return "";
+    }
+    return parsed.href;
+  } catch (err) {
+    return "";
+  }
+}
+// External product images must use HTTPS.
+function normalizeHttpsImageUrl(value) {
+  var raw = typeof value === "string" ? value.trim() : "";
+  if (!raw) return "";
+  try {
+    var parsed = new URL(raw);
+    if (parsed.protocol !== "https:" || !parsed.hostname || parsed.username || parsed.password) {
+      return "";
+    }
+    return parsed.href;
+  } catch (err) {
+    return "";
+  }
+}
+function normalizeProducts(value) {
+  if (!Array.isArray(value)) return { ok: false, error: "Products must be an array." };
+  var result = [];
+  for (var i = 0; i < value.length; i++) {
+    var item = value[i];
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      return { ok: false, error: "Product " + (i + 1) + " must be an object." };
+    }
+    var link = normalizeHttpUrl(item.link);
+    var img = normalizeHttpsImageUrl(item.img);
+    var text = typeof item.text === "string" ? item.text.trim() : "";
+    var alt = typeof item.alt === "string" ? item.alt.trim() : "";
+    var redirectRaw = typeof item.redirect === "string" ? item.redirect.trim() : "";
+    var redirect = redirectRaw ? normalizeHttpUrl(redirectRaw) : "";
+    if (!link) return { ok: false, error: "Product " + (i + 1) + " has an invalid link URL. Use an absolute HTTP or HTTPS URL." };
+    if (!img) return { ok: false, error: "Product " + (i + 1) + " has an invalid image URL. Use an absolute HTTPS URL." };
+    if (!text) return { ok: false, error: "Product " + (i + 1) + " is missing its description." };
+    if (redirectRaw && !redirect) return { ok: false, error: "Product " + (i + 1) + " has an invalid redirect URL." };
+    result.push({ link: link, img: img, alt: alt.slice(0, 300), text: text.slice(0, 2000), redirect: redirect });
+  }
+  return { ok: true, products: result };
+}
+function normalizeConfig(value) {
+  var source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+  var result = Object.assign({}, DEFAULTS);
+  Object.keys(DEFAULTS).forEach(function (key) {
+    if (!Object.prototype.hasOwnProperty.call(source, key)) return;
+    var candidate = source[key];
+    if (key === "banner_w") {
+      if (Number.isFinite(Number(candidate))) result[key] = Math.max(100, Math.min(1200, Math.round(Number(candidate))));
+    } else if (key === "banner_h") {
+      if (Number.isFinite(Number(candidate))) result[key] = Math.max(50, Math.min(1200, Math.round(Number(candidate))));
+    } else if (key === "slide_speed") {
+      if (Number.isFinite(Number(candidate))) result[key] = Math.max(2, Math.min(10, Math.round(Number(candidate))));
+    } else if (key.indexOf("color_") === 0) {
+      if (key === "color_wrap_bg" && candidate === "transparent") result[key] = "transparent";
+      else if (typeof candidate === "string" && /^#[0-9a-fA-F]{6}$/.test(candidate)) result[key] = candidate;
+    } else if (typeof DEFAULTS[key] === "boolean") {
+      if (typeof candidate === "boolean") result[key] = candidate;
+    } else if (typeof DEFAULTS[key] === "string") {
+      if (typeof candidate === "string") result[key] = candidate.slice(0, key === "title_text" ? 80 : 200);
+    }
+  });
+  result.title_url = normalizeHttpUrl(result.title_url) || DEFAULTS.title_url;
+  // Old saved configs have no dot color: keep the previous look (dots followed the accent)
+  if (!Object.prototype.hasOwnProperty.call(source, "color_dot")) result.color_dot = result.color_accent;
+  // Only accept known slide directions
+  if (["forward", "backward", "bounce"].indexOf(result.slide_dir) < 0) result.slide_dir = DEFAULTS.slide_dir;
+  if (result.color_wrap_bg !== "transparent" && !/^#[0-9a-fA-F]{6}$/.test(result.color_wrap_bg)) {
+    result.color_wrap_bg = DEFAULTS.color_wrap_bg;
+  }
+  return result;
+}
+function normalizeStrings(value) {
+  var result = { it: {}, en: {} };
+  if (!value || typeof value !== "object" || Array.isArray(value)) return result;
+  ["it", "en"].forEach(function (lang) {
+    var source = value[lang];
+    if (!source || typeof source !== "object" || Array.isArray(source)) return;
+    Object.keys(source).forEach(function (key) {
+      if (typeof source[key] === "string") result[lang][key] = source[key].slice(0, 1000);
+    });
+  });
+  return result;
+}
+// Load products, flags and language (localStorage or Electron)
+function loadState() {
+  try {
+    var tmp = localStorage.getItem(LS_LANG);
+    if (tmp === "it" || tmp === "en") {
+      currentLang = tmp;
+    }
+  } catch (err) {}
+  try {
+    var tmp2 = localStorage.getItem(LS_STRINGS);
+    if (tmp2) {
+      customStrings = normalizeStrings(JSON.parse(tmp2));
+    }
+  } catch (err) {}
+  if (window.electronAPI) {
+    PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    cfg = Object.assign({}, DEFAULTS);
+    window.electronAPI.loadState().then(function (result) {
+      if (result.ok) {
+        try {
+          var parsed = JSON.parse(result.content);
+          if (parsed.products !== undefined) {
+            var checkedProducts = normalizeProducts(parsed.products);
+            if (checkedProducts.ok) PRODUCTS = checkedProducts.products;
+          }
+          cfg = normalizeConfig(parsed.flags);
+          if (parsed.lang === "it" || parsed.lang === "en") currentLang = parsed.lang;
+          customStrings = normalizeStrings(parsed.strings);
+        } catch (err) {}
+        buildColorGrid();
+        buildFlagGroups();
+        applyCfgToDOM();
+        buildProductList();
+        applyI18n();
+        buildLangEditor();
+        renderPreview();
+        addHelpIconsToDynamic();
+      }
+    }).catch(function () {});
+  } else {
+    try {
+      var tmp3 = localStorage.getItem(LS_PRODUCTS);
+      var loadedProducts = tmp3 ? normalizeProducts(JSON.parse(tmp3)) : { ok: true, products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)) };
+      PRODUCTS = loadedProducts.ok ? loadedProducts.products : JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    } catch (err) {
+      PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    }
+    try {
+      var tmp4 = localStorage.getItem(LS_FLAGS);
+      cfg = tmp4 ? normalizeConfig(JSON.parse(tmp4)) : Object.assign({}, DEFAULTS);
+    } catch (err) {
+      cfg = Object.assign({}, DEFAULTS);
+    }
+  }
+}
+// Persist products, flags and language
+function saveState() {
+  var data = {
+    products: PRODUCTS,
+    flags: cfg,
+    lang: currentLang,
+    strings: customStrings
+  };
+  var tmp = JSON.stringify(data);
+  if (window.electronAPI) {
+    try {
+      Promise.resolve(window.electronAPI.persistState(tmp)).catch(function () {
+        showStatus("err", t("msg_err"));
+      });
+    } catch (err) {
+      showStatus("err", t("msg_err"));
+    }
+  } else {
+    try {
+      localStorage.setItem(LS_PRODUCTS, JSON.stringify(PRODUCTS));
+      localStorage.setItem(LS_FLAGS, JSON.stringify(cfg));
+      localStorage.setItem(LS_LANG, currentLang);
+      localStorage.setItem(LS_STRINGS, JSON.stringify(customStrings));
+    } catch (err) {
+      showStatus("err", t("msg_err"));
+    }
+  }
+}
+function buildPresets() {
+  var presetsContainerEl = document.getElementById("presetsContainer");
+  var out = "";
+  for (var val in IAB_PRESETS) {
+    var tmp = IAB_PRESETS[val][0];
+    var tmp2 = IAB_PRESETS[val][1];
+    out += "<div class=\"preset\" data-w=\"" + tmp + "\" data-h=\"" + tmp2 + "\" onclick=\"applyPreset(" + tmp + "," + tmp2 + ")\">" + val + "<br>" + tmp + "×" + tmp2 + "</div>";
+  }
+  presetsContainerEl.innerHTML = out;
+}
+function buildColorGrid() {
+  var colorGridEl = document.getElementById("colorGrid");
+  var out = "";
+  COLOR_KEYS.forEach(function (item) {
+    var tmp4 = cfg[item] || "#000000";
+    out += "<div class=\"color-row\">";
+    out += "<span class=\"color-lbl\">" + t(item) + "</span>";
+    out += "<input type=\"color\" id=\"" + item + "_cp\" value=\"" + tmp4 + "\" oninput=\"syncColor('" + item + "',this.value)\">";
+    out += "<input type=\"text\" class=\"hex-in\" id=\"" + item + "\" value=\"" + tmp4 + "\" maxlength=\"9\" oninput=\"syncPicker('" + item + "',this.value)\" data-colorkey=\"" + item + "\">";
+    out += "</div>";
+  });
+  var tmp = cfg.color_wrap_bg || "transparent";
+  var tmp2 = tmp === "transparent";
+  var tmp3 = tmp2 ? "#ffffff" : tmp;
+  out += "<hr style=\"border:none;border-top:1px solid var(--bd);margin:8px 0\">";
+  out += "<div class=\"color-row\" style=\"flex-wrap:wrap;gap:6px\">";
+  out += "<span class=\"color-lbl\" style=\"width:100%\">" + t("color_wrap_bg") + "</span>";
+  out += "<label style=\"display:flex;align-items:center;gap:5px;font-size:13px;color:var(--txt);cursor:pointer\"><input type=\"checkbox\" id=\"wrap_transparent\" " + (tmp2 ? "checked" : "") + " onchange=\"toggleWrapTransp(this.checked)\"> " + t("transparent") + "</label>";
+  out += "<input type=\"color\" id=\"color_wrap_bg_cp\" value=\"" + tmp3 + "\" " + (tmp2 ? "disabled" : "") + " oninput=\"syncWrapColor(this.value)\">";
+  out += "<input type=\"text\" class=\"hex-in\" id=\"color_wrap_bg\" value=\"" + (tmp2 ? "transparent" : tmp3) + "\" maxlength=\"12\" " + (tmp2 ? "disabled" : "") + " oninput=\"if(/^#[0-9a-fA-F]{6}$/.test(this.value)){document.getElementById('color_wrap_bg_cp').value=this.value;scheduleRender();scheduleSave();}\">";
+  out += "</div>";
+  colorGridEl.innerHTML = out;
+}
+function buildFlagGroups() {
+  var flagGroupsContainerEl = document.getElementById("flagGroupsContainer");
+  var out = "";
+  FLAG_GROUPS.forEach(function (item) {
+    var tmp = item[0];
+    var tmp2 = item[1];
+    out += "<div class=\"sec\"><div class=\"sec-hd\" onclick=\"toggleSec(this)\">" + t(tmp) + " <span class=\"arr\">▾</span></div><div class=\"sec-body\">";
+    for (var val in tmp2) {
+      var tmp3 = cfg[val] ? "checked" : "";
+      out += "<div class=\"flag-row\"><span class=\"flag-lbl\">" + t(val) + "</span>";
+      out += "<label class=\"toggle\"><input type=\"checkbox\" id=\"flag_" + val + "\" data-flagkey=\"" + val + "\" " + tmp3 + " onchange=\"onFlag()\"><span class=\"tsl\"></span></label>";
+      out += "</div>";
+    }
+    out += "</div></div>";
+  });
+  flagGroupsContainerEl.innerHTML = out;
+}
+function buildProductList() {
+  var productListEl = document.getElementById("productList");
+  document.getElementById("prodBadge").textContent = PRODUCTS.length;
+  if (!PRODUCTS.length) {
+    productListEl.innerHTML = "<p style=\"color:var(--mut);text-align:center;padding:12px 0\">—</p>";
+    return;
+  }
+  var editIdxEl = parseInt(document.getElementById("editIdx").value);
+  var out = "";
+  PRODUCTS.forEach(function (item, item2) {
+    var tmp = item2 === editIdxEl ? " editing" : "";
+    var safeImg = normalizeHttpsImageUrl(item.img);
+    var tmp2 = safeImg ? "<img class=\"pthumb\" src=\"" + heUrl(safeImg) + "\" alt=\"\" onerror=\"this.style.display='none'\" loading=\"lazy\">" : "<div class=\"pthumb-ph\">?</div>";
+    out += "<div class=\"prow" + tmp + "\" data-idx=\"" + item2 + "\" draggable=\"true\">";
+    out += "<div class=\"drag-h\"></div>" + tmp2;
+    out += "<div class=\"pinfo\"><div class=\"palt\">" + he(item.alt || "—") + "</div><div class=\"ptxt\">" + he(item.text) + "</div></div>";
+    out += "<div class=\"pact\">";
+    out += "<button class=\"btn btn-edit-ico\" onclick=\"startEdit(" + item2 + ")\" title=\"Edit\"></button>";
+    out += "<button class=\"btn btn-del-ico\" onclick=\"deleteProduct(" + item2 + ")\" title=\"Delete\"></button>";
+    out += "</div></div>";
+  });
+  productListEl.innerHTML = out;
+  initDragDrop();
+}
+var currentLedLang = "it";
+// Language editor: render current tab
+function buildLangEditor() {
+  showLangTab(currentLedLang);
+}
+function showLangTab(lang) {
+  currentLedLang = lang;
+  document.getElementById("ledTabIt").style.fontWeight = lang === "it" ? "700" : "400";
+  document.getElementById("ledTabEn").style.fontWeight = lang === "en" ? "700" : "400";
+  var langEditorContentEl = document.getElementById("langEditorContent");
+  var tmp = LANG_DEFAULTS[lang];
+  var tmp2 = customStrings[lang] || {};
+  var tmp3 = Object.keys(tmp);
+  var data = {
+    UI: ["add_product", "img_url", "link_url", "redirect_url", "redirect_hint", "alt_name", "desc_text", "btn_add", "btn_cancel", "btn_save_edit", "products", "drag_hint", "export", "btn_download", "btn_copy", "btn_export_json", "btn_import_json", "live_preview", "layout_v", "layout_h", "layout_n", "dimensions", "iab_presets", "timing", "timing_hint", "slide_dir_lbl", "dir_forward", "dir_backward", "dir_bounce", "colors", "title_sec", "show_title", "title_text_lbl", "title_url_lbl", "lang_editor", "lang_editor_hint", "btn_reset_lang", "saving", "saved"],
+    Colors: ["color_bg1", "color_bg2", "color_border", "color_accent", "color_dot", "color_text", "color_title", "color_progress", "color_hr", "color_wrap_bg", "transparent"],
+    Flags: ["show_border", "show_hr", "hover_zoom", "slide_anim", "vignette", "scanlines", "progress_bar", "pb_vu", "dot_nav", "slide_counter", "pause_icon", "name_highlight", "divider", "lazy_load", "content_vis", "grp_aspect", "grp_ui", "grp_text", "grp_perf"],
+    Messages: ["msg_added", "msg_updated", "msg_deleted", "msg_required", "msg_imported", "msg_invalid_json", "msg_saved_path", "msg_exported", "msg_err", "msg_copied", "msg_copy_err", "confirm_delete"]
+  };
+  var out = "";
+  for (var val in data) {
+    out += "<div class=\"lang-section-hd\">" + val + "</div>";
+    data[val].forEach(function (item) {
+      var tmp4 = tmp[item] || "";
+      var tmp5 = tmp2[item] !== undefined ? tmp2[item] : "";
+      var tmp6 = tmp5 || tmp4;
+      out += "<div class=\"lang-ed-row\">";
+      out += "<span class=\"lang-ed-key\">" + item + "</span>";
+      out += "<input class=\"lang-ed-input\" data-lang=\"" + lang + "\" data-key=\"" + item + "\" value=\"" + he(tmp6) + "\" placeholder=\"" + he(tmp4) + "\" oninput=\"onLangEdit(this)\">";
+      out += "</div>";
+    });
+  }
+  langEditorContentEl.innerHTML = out;
+}
+// Language editor: store a custom string
+function onLangEdit(input) {
+  var value = input.getAttribute("data-lang");
+  var value2 = input.getAttribute("data-key");
+  var value3 = input.value.trim();
+  if (!customStrings[value]) {
+    customStrings[value] = {};
+  }
+  if (value3 === "" || value3 === LANG_DEFAULTS[value][value2]) {
+    delete customStrings[value][value2];
+  } else {
+    customStrings[value][value2] = value3;
+  }
+  applyI18n();
+  buildColorGrid();
+  buildFlagGroups();
+  scheduleSave();
+}
+function resetLang() {
+  customStrings[currentLedLang] = {};
+  applyI18n();
+  buildColorGrid();
+  buildFlagGroups();
+  buildLangEditor();
+  scheduleSave();
+  showFlash(currentLedLang.toUpperCase() + " reset.", "ok");
+}
+// Add or update a product (incl. optional redirect URL)
+function submitProduct() {
+  var editIdxEl = parseInt(document.getElementById("editIdx").value);
+  var fLinkEl = document.getElementById("fLink").value.trim();
+  var fImgEl = document.getElementById("fImg").value.trim();
+  var fAltEl = document.getElementById("fAlt").value.trim();
+  var fTextEl = document.getElementById("fText").value.trim();
+  var fRedirectEl = document.getElementById("fRedirect").value.trim();
+  if (!fLinkEl || !fImgEl || !fTextEl) {
+    showFlash(t("msg_required"), "err");
+    return;
+  }
+  var safeLink = normalizeHttpUrl(fLinkEl);
+  var safeImg = normalizeHttpsImageUrl(fImgEl);
+  var safeRedirect = fRedirectEl ? normalizeHttpUrl(fRedirectEl) : "";
+  if (!safeLink || (fRedirectEl && !safeRedirect)) {
+    showFlash("Use valid absolute HTTP or HTTPS URLs for the product link and optional redirect.", "err");
+    return;
+  }
+  if (!safeImg) {
+    showFlash("The image URL must be a valid absolute HTTPS URL. HTTP images are not accepted.", "err");
+    return;
+  }
+  var data = {
+    link: safeLink,
+    img: safeImg,
+    alt: fAltEl,
+    text: fTextEl,
+    redirect: safeRedirect
+  };
+  var tmp = data;
+  if (editIdxEl >= 0 && editIdxEl < PRODUCTS.length) {
+    PRODUCTS[editIdxEl] = tmp;
+    showFlash(t("msg_updated"), "ok");
+  } else {
+    PRODUCTS.push(tmp);
+    showFlash(t("msg_added"), "ok");
+  }
+  cancelEdit();
+  saveState();
+  buildProductList();
+  scheduleRender();
+}
+function startEdit(idx) {
+  var tmp = PRODUCTS[idx];
+  document.getElementById("editIdx").value = idx;
+  document.getElementById("fLink").value = tmp.link || "";
+  document.getElementById("fImg").value = tmp.img || "";
+  document.getElementById("fAlt").value = tmp.alt || "";
+  document.getElementById("fText").value = tmp.text || "";
+  document.getElementById("fRedirect").value = tmp.redirect || "";
+  document.getElementById("secAddEditTitle").innerHTML = "✏️ #" + (idx + 1);
+  document.getElementById("btnSubmit").textContent = t("btn_save_edit");
+  document.getElementById("btnCancelEdit").style.display = "";
+  document.getElementById("btnCancelEdit").textContent = t("btn_cancel");
+  refreshImgPrev(tmp.img || "");
+  document.getElementById("secAddEdit").classList.add("open");
+  buildProductList();
+}
+function cancelEdit() {
+  document.getElementById("editIdx").value = -1;
+  document.getElementById("fLink").value = "";
+  document.getElementById("fImg").value = "";
+  document.getElementById("fAlt").value = "";
+  document.getElementById("fText").value = "";
+  document.getElementById("fRedirect").value = "";
+  document.getElementById("secAddEditTitle").innerHTML = "＋ " + t("add_product");
+  document.getElementById("btnSubmit").textContent = t("btn_add");
+  document.getElementById("btnCancelEdit").style.display = "none";
+  refreshImgPrev("");
+  buildProductList();
+}
+function deleteProduct(idx) {
+  if (!confirm(t("confirm_delete"))) {
+    return;
+  }
+  PRODUCTS.splice(idx, 1);
+  saveState();
+  buildProductList();
+  scheduleRender();
+  showFlash(t("msg_deleted"), "ok");
+}
+function initDragDrop() {
+  var productListEl = document.getElementById("productList");
+  if (!productListEl || productListEl.dataset.dragDropInitialized === "true") return;
+  productListEl.dataset.dragDropInitialized = "true";
+  var tmp = null;
+  productListEl.addEventListener("dragstart", function (arg) {
+    tmp = arg.target.closest(".prow");
+    if (!tmp) {
+      return;
+    }
+    setTimeout(function () {
+      if (tmp) {
+        tmp.classList.add("dragging");
+      }
+    }, 0);
+    arg.dataTransfer.effectAllowed = "move";
+  });
+  productListEl.addEventListener("dragend", function () {
+    productListEl.querySelectorAll(".prow").forEach(function (el) {
+      el.classList.remove("dragging", "drag-over");
+    });
+    if (tmp) {
+      tmp = null;
+      saveOrder();
+    }
+  });
+  productListEl.addEventListener("dragover", function (arg) {
+    arg.preventDefault();
+    var tmp2 = arg.target.closest(".prow");
+    if (!tmp2 || tmp2 === tmp) {
+      return;
+    }
+    productListEl.querySelectorAll(".drag-over").forEach(function (el) {
+      el.classList.remove("drag-over");
+    });
+    tmp2.classList.add("drag-over");
+    productListEl.insertBefore(tmp, arg.clientY - tmp2.getBoundingClientRect().top > tmp2.offsetHeight / 2 ? tmp2.nextSibling : tmp2);
+  });
+  productListEl.addEventListener("dragleave", function (arg) {
+    var tmp2 = arg.target.closest(".prow");
+    if (tmp2) {
+      tmp2.classList.remove("drag-over");
+    }
+  });
+}
+function saveOrder() {
+  var productListEl = document.getElementById("productList");
+  var tmp = [];
+  productListEl.querySelectorAll(".prow").forEach(function (el) {
+    tmp.push(PRODUCTS[parseInt(el.dataset.idx)]);
+  });
+  if (tmp.length === PRODUCTS.length) {
+    PRODUCTS = tmp;
+    saveState();
+    scheduleRender();
+    buildProductList();
+  }
+}
+function readCfg() {
+  cfg.banner_w = +document.getElementById("sW").value;
+  cfg.banner_h = +document.getElementById("sH").value;
+  cfg.slide_speed = +document.getElementById("sSpeed").value;
+  var sDirEl = document.getElementById("sDirection");
+  if (sDirEl) cfg.slide_dir = sDirEl.value;
+  document.querySelectorAll("[data-colorkey]").forEach(function (el) {
+    cfg[el.dataset.colorkey] = el.value;
+  });
+  var wrap_transparentEl = document.getElementById("wrap_transparent");
+  var color_wrap_bgEl = document.getElementById("color_wrap_bg");
+  if (wrap_transparentEl && wrap_transparentEl.checked) {
+    cfg.color_wrap_bg = "transparent";
+  } else if (color_wrap_bgEl) {
+    cfg.color_wrap_bg = color_wrap_bgEl.value || "#ffffff";
+  }
+  document.querySelectorAll("[data-flagkey]").forEach(function (el) {
+    cfg[el.dataset.flagkey] = el.checked;
+  });
+  cfg.title_text = (document.getElementById("title_text") || {
+    value: ""
+  }).value || "The Amy Family";
+  cfg.title_url = (document.getElementById("title_url") || {
+    value: ""
+  }).value || "https://www.amigatronic.com";
+  return cfg;
+}
+function applyCfgToDOM() {
+  document.getElementById("sW").value = cfg.banner_w;
+  document.getElementById("sH").value = cfg.banner_h;
+  document.getElementById("sSpeed").value = cfg.slide_speed;
+  var sDirEl2 = document.getElementById("sDirection");
+  if (sDirEl2) sDirEl2.value = cfg.slide_dir;
+  COLOR_KEYS.forEach(function (item) {
+    var tmp3 = document.getElementById(item);
+    if (tmp3) {
+      tmp3.value = cfg[item] || "";
+    }
+    var tmp4 = document.getElementById(item + "_cp");
+    if (tmp4) {
+      tmp4.value = cfg[item] || "#000000";
+    }
+  });
+  var tmp = cfg.color_wrap_bg || "transparent";
+  var tmp2 = tmp === "transparent";
+  var wrap_transparentEl = document.getElementById("wrap_transparent");
+  if (wrap_transparentEl) {
+    wrap_transparentEl.checked = tmp2;
+  }
+  var color_wrap_bg_cpEl = document.getElementById("color_wrap_bg_cp");
+  if (color_wrap_bg_cpEl) {
+    color_wrap_bg_cpEl.disabled = tmp2;
+    color_wrap_bg_cpEl.value = tmp2 ? "#ffffff" : tmp;
+  }
+  var color_wrap_bgEl = document.getElementById("color_wrap_bg");
+  if (color_wrap_bgEl) {
+    color_wrap_bgEl.disabled = tmp2;
+    color_wrap_bgEl.value = tmp;
+  }
+  document.querySelectorAll("[data-flagkey]").forEach(function (el) {
+    el.checked = !!cfg[el.dataset.flagkey];
+  });
+  var title_textEl = document.getElementById("title_text");
+  if (title_textEl) {
+    title_textEl.value = cfg.title_text || "The Amy Family";
+  }
+  var title_urlEl = document.getElementById("title_url");
+  if (title_urlEl) {
+    title_urlEl.value = cfg.title_url || "https://www.amigatronic.com";
+  }
+}
+// Escape text for HTML
+function he(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+// Escape quotes in URLs for HTML attributes
+function heUrl(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+// Comet-tail keyframes for one dot: bright head followed by a soft fading tail (bounce mode)
+function _cometKeyframes(name, slots, L, accent) {
+  // Intensity profile around the slot where the head sits: [slot offset, intensity 0..1]
+  var prof = [[-0.2, 0], [0, 1], [0.9, 1], [1.1, 0.55], [2.1, 0.28], [3.1, 0.1], [4.1, 0]];
+  var R = parseInt(accent.slice(1, 3), 16);
+  var G = parseInt(accent.slice(3, 5), 16);
+  var B = parseInt(accent.slice(5, 7), 16);
+  // Intensity at time t (in slots): max over this dot's windows, cyclic
+  function at(t) {
+    var v = 0;
+    slots.forEach(function (a) {
+      for (var w = -1; w <= 1; w++) {
+        var x = t - a + w * L;
+        if (x <= prof[0][0] || x >= prof[prof.length - 1][0]) continue;
+        for (var j = 1; j < prof.length; j++) {
+          if (x <= prof[j][0]) {
+            var p0 = prof[j - 1];
+            var p1 = prof[j];
+            v = Math.max(v, p0[1] + (p1[1] - p0[1]) * (x - p0[0]) / (p1[0] - p0[0]));
+            break;
+          }
+        }
+      }
+    });
+    return v;
+  }
+  // Sample only at the profile breakpoints (keeps the CSS small)
+  var ts = [0, L];
+  slots.forEach(function (a) {
+    prof.forEach(function (p) {
+      ts.push(+((((a + p[0]) % L) + L) % L).toFixed(4));
+    });
+  });
+  ts.sort(function (x, y) { return x - y; });
+  var kf = "@keyframes " + name + "{";
+  var last = -1;
+  ts.forEach(function (t) {
+    if (t === last) return;
+    last = t;
+    var I = at(t);
+    var r = Math.round(128 + (R - 128) * I);
+    var g = Math.round(128 + (G - 128) * I);
+    var b = Math.round(128 + (B - 128) * I);
+    var al = +(0.3 + 0.7 * I).toFixed(3);
+    kf += +(t / L * 100).toFixed(3) + "%{background:rgba(" + r + "," + g + "," + b + "," + al + ");transform:scale(" + (1 + 0.5 * I).toFixed(3) + ");box-shadow:0 0 " + (8 * I).toFixed(1) + "px rgba(" + R + "," + G + "," + B + "," + (0.9 * I).toFixed(3) + ")}";
+  });
+  return kf + "}";
+}
+// Build the playback sequence of product indexes for the chosen direction
+function _buildSeq(n, dir) {
+  var seq = [];
+  var i;
+  for (i = 0; i < n; i++) seq.push(i);
+  if (dir === "backward") {
+    seq.reverse();
+  } else if (dir === "bounce" && n > 2) {
+    // Ping-pong: 1..N then N-1..2 (end slides are not repeated)
+    for (i = n - 2; i >= 1; i--) seq.push(i);
+  }
+  return seq;
+}
+// Generate pure CSS carousel (no JavaScript in the output)
+function buildCarousel(products, f) {
+  var n = products.length;
+  var res = {
+    css: "",
+    html: "<p style=\"color:#888;padding:20px;text-align:center\">—</p>",
+    full: "",
+    bw: f.banner_w || 280,
+    bh: f.banner_h || 400,
+    isH: false,
+    isN: false,
+    rotH: f.banner_h || 400
+  };
+  if (!n) {
+    return res;
+  }
+  var speed = Math.max(2, Math.min(10, f.slide_speed | 0));
+  // Playback sequence: one slot per displayed step (clones are used for bounce)
+  var dir = f.slide_dir === "backward" || f.slide_dir === "bounce" ? f.slide_dir : "forward";
+  var seq = _buildSeq(n, dir);
+  var L = seq.length;
+  var cycle = L * speed;
+  var pi = +(3 / L).toFixed(3);
+  var pv = +(100 / L * 0.92).toFixed(3);
+  var po = +(100 / L).toFixed(3);
+  var bw = Math.max(100, Math.min(1200, f.banner_w | 0));
+  var bh = Math.max(50, Math.min(1200, f.banner_h | 0));
+  var isH = bw > bh * 1.5;
+  var isN = !isH && bw < 180;
+  var hasDots = f.dot_nav;
+  var rotH = bh - (hasDots ? 24 : 0);
+  var pad = Math.max(8, Math.round(Math.min(bw, rotH) * 0.04));
+  var gap = Math.max(4, Math.round(pad * 0.5));
+  var innerW = bw - pad * 2;
+  var innerH = rotH - pad * 2;
+  var imgH;
+  var imgW;
+  var textZH;
+  if (isH) {
+    imgW = Math.round(innerW * 0.38);
+    imgH = innerH;
+    textZH = innerH;
+  } else {
+    var dividerH = f.divider ? gap * 2 + 2 : gap;
+    imgH = Math.round(innerH * 0.62);
+    textZH = innerH - imgH - dividerH;
+    imgW = innerW;
+  }
+  var fontBodyPref = Math.min(bw * 0.042, textZH * 0.2);
+  var fontNamePref = fontBodyPref * 1.15;
+  var fontBody = "clamp(7px," + Math.max(7, +fontBodyPref.toFixed(2)) + "px,14px)";
+  var fontName = "clamp(8px," + Math.max(8, +fontNamePref.toFixed(2)) + "px,15px)";
+  var fontTitle = "clamp(7px," + Math.max(7, +fontBodyPref.toFixed(2)) + "px,13px)";
+  var titleSpacing = bw < 200 ? "1px" : "3px";
+  var showTitle = !!f.show_title;
+  var titleText = f.title_text || "The Amy Family";
+  var titleUrl = normalizeHttpUrl(f.title_url) || "https://www.amigatronic.com";
+  var cBg1 = f.color_bg1;
+  var cBg2 = f.color_bg2;
+  var cBorder = f.color_border;
+  var cAccent = f.color_accent;
+  var cDot = f.color_dot || cAccent;
+  var cText = f.color_text;
+  var cTitle = f.color_title;
+  var cProgress = f.color_progress;
+  var cHr = f.color_hr;
+  var cWrapBg = f.color_wrap_bg || "transparent";
+  var bgCSS = "background:linear-gradient(160deg," + cBg1 + " 0%," + cBg2 + " 100%);box-shadow:0 8px 32px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);";
+  var borderCSS = f.show_border ? ".amy-rotator::before{content:'';position:absolute;inset:0;border-radius:10px;padding:1px;background:linear-gradient(135deg," + cBorder + " 0%,rgba(0,0,0,.15) 45%," + cBorder + " 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:10;}" : "";
+  var hoverCSS = f.hover_zoom ? ".amy-combo a:hover img{transform:scale(1.05) translateY(-4px);filter:drop-shadow(0 10px 22px " + cBorder + "88);}" : "";
+  var animKeyframes = f.slide_anim ? "@keyframes amyFade{0%{opacity:0;transform:scale(.96) translateY(7px)}" + pi + "%{opacity:1;transform:scale(1) translateY(0)}" + pv + "%{opacity:1;transform:scale(1) translateY(0)}" + po + "%,100%{opacity:0;transform:scale(.96) translateY(-7px)}}" : "@keyframes amyFade{0%{opacity:0}" + pi + "%{opacity:1}" + pv + "%{opacity:1}" + po + "%,100%{opacity:0}}";
+  var vignetteCSS = f.vignette ? ".amy-vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.8) 100%);pointer-events:none;z-index:4;border-radius:10px;}" : "";
+  var vignetteHTML = f.vignette ? "<div class=\"amy-vig\" aria-hidden=\"true\"></div>" : "";
+  var scanCSS = f.scanlines ? ".amy-scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:5;border-radius:10px;}" : "";
+  var scanHTML = f.scanlines ? "<div class=\"amy-scan\" aria-hidden=\"true\"></div>" : "";
+  var pauseCSS = f.pause_icon ? ".amy-pause{position:absolute;bottom:8px;right:10px;font-size:13px;color:rgba(0,0,0,0);transition:color .3s;z-index:6;pointer-events:none;user-select:none;}.amy-rotator:hover .amy-pause{color:" + cAccent + "88;}" : "";
+  var pauseHTML = f.pause_icon ? "<div class=\"amy-pause\" aria-hidden=\"true\">⏸</div>" : "";
+  var delays = "";
+  for (var i = 0; i < L; i++) {
+    delays += ".amy-c" + (i + 1) + "{animation-delay:" + i * speed + "s}\n";
+  }
+  var dotCSS = "";
+  var dotHTML = "";
+  if (f.dot_nav) {
+    dotCSS = "@keyframes amyDot{0%{background:" + cDot + ";transform:scale(1.5)}" + pv + "%{background:" + cDot + ";transform:scale(1.5)}" + po + "%,100%{background:rgba(128,128,128,.3);transform:scale(1)}}";
+    var dotDelays = "";
+    var dotSpans = "";
+    for (var i = 0; i < n; i++) {
+      var dotSlots = [];
+      for (var k = 0; k < L; k++) if (seq[k] === i) dotSlots.push(k);
+      if (dir === "bounce" && n > 2) {
+        // Comet tail: head on this product's slots, soft tail behind it in the travel direction
+        var dkf = _cometKeyframes("amyDot" + (i + 1), dotSlots, L, cDot);
+        dotCSS += dkf + ".amy-dot-" + (i + 1) + "{animation-name:amyDot" + (i + 1) + "}";
+        dotDelays += ".amy-dot-" + (i + 1) + "{animation-delay:0s}";
+      } else {
+        dotDelays += ".amy-dot-" + (i + 1) + "{animation-delay:" + dotSlots[0] * speed + "s}";
+      }
+      dotSpans += "<span class=\"amy-dot amy-dot-" + (i + 1) + "\"></span>";
+    }
+    dotCSS += dotDelays;
+    dotHTML = "<div class=\"amy-dots\" aria-hidden=\"true\">" + dotSpans + "</div>";
+  }
+  var pbCSS = "";
+  var pbHTML = "";
+  if (f.progress_bar) {
+    var pbStep = +(100 / L).toFixed(4);
+    var pbGap = +(0.4 / cycle * 100).toFixed(4);
+    if (!f.pb_vu) {
+      var pbSimpleKf = "@keyframes amyPbSimple{";
+      if (n > 0) {
+        pbSimpleKf += "0%{transform:scaleX(0)}";
+      }
+      for (var i = 0; i < L; i++) {
+        var pbEnd = +((i + 1) * pbStep - pbGap).toFixed(4);
+        var pbNext = +((i + 1) * pbStep).toFixed(4);
+        pbSimpleKf += pbEnd + "%{transform:scaleX(1)}" + pbNext + "%{transform:scaleX(0)}";
+      }
+      pbSimpleKf += "100%{transform:scaleX(0)}}";
+      pbCSS = pbSimpleKf;
+      pbHTML = "<div class=\"amy-pb\" aria-hidden=\"true\"><div class=\"amy-seg-simple\"></div></div>";
+    } else {
+      var pbGreen = "@keyframes amyPbGreen{0%{transform:scaleX(0)}";
+      var pbYellow = "@keyframes amyPbYellow{0%{transform:scaleX(0)}";
+      var pbRed = "@keyframes amyPbRed{0%{transform:scaleX(0)}";
+      var pbBright = "@keyframes amyPbBright{0%{box-shadow:none}";
+      for (var i = 0; i < L; i++) {
+        var segStart = +(i * pbStep).toFixed(4);
+        var segEnd = +((i + 1) * pbStep - pbGap).toFixed(4);
+        var segNext = +((i + 1) * pbStep).toFixed(4);
+        var segSpan = segEnd - segStart;
+        var tGreen = +(segStart + segSpan * 0.55).toFixed(4);
+        var tYellow = +(segStart + segSpan * 0.78).toFixed(4);
+        var tRed = +(segStart + segSpan * 0.92).toFixed(4);
+        pbGreen += tGreen + "%{transform:scaleX(1)}" + segEnd + "%{transform:scaleX(1)}" + segNext + "%{transform:scaleX(0)}";
+        pbYellow += segStart + "%{transform:scaleX(0)}" + tGreen + "%{transform:scaleX(0)}" + tYellow + "%{transform:scaleX(1)}" + segEnd + "%{transform:scaleX(1)}" + segNext + "%{transform:scaleX(0)}";
+        pbRed += segStart + "%{transform:scaleX(0)}" + tYellow + "%{transform:scaleX(0)}" + segEnd + "%{transform:scaleX(1)}" + segNext + "%{transform:scaleX(0)}";
+        pbBright += tYellow + "%{box-shadow:none}" + tRed + "%{box-shadow:0 0 4px #e74c3c,0 0 8px #e74c3caa}" + segEnd + "%{box-shadow:0 0 6px #e74c3c,0 0 14px #e74c3c88,0 0 2px #fff4}" + segNext + "%{box-shadow:none}";
+      }
+      pbGreen += "100%{transform:scaleX(0)}}";
+      pbYellow += "100%{transform:scaleX(0)}}";
+      pbRed += "100%{transform:scaleX(0)}}";
+      pbBright += "100%{box-shadow:none}}";
+      pbCSS = pbGreen + pbYellow + pbRed + pbBright;
+      pbHTML = "<div class=\"amy-pb\" aria-hidden=\"true\"><div class=\"amy-seg amy-seg-g\"></div><div class=\"amy-seg amy-seg-y\"></div><div class=\"amy-seg amy-seg-r\"></div></div>";
+    }
+  }
+  var items = "";
+  for (var slot = 0; slot < L; slot++) {
+    var pi_ = seq[slot];
+    var prod = products[pi_];
+    var idx = slot + 1;
+    var pnum = pi_ + 1;
+    var isClone = seq.indexOf(pi_) !== slot;
+    var tabAttr = isClone ? " tabindex=\"-1\"" : "";
+    var safeLink = normalizeHttpUrl(prod.redirect && prod.redirect.trim() ? prod.redirect.trim() : prod.link) || "#";
+    var safeImage = normalizeHttpsImageUrl(prod.img);
+    var link = heUrl(safeLink);
+    var img = safeImage ? heUrl(safeImage) : "";
+    var alt = he(prod.alt);
+    var lazyAttr = f.lazy_load ? " loading=\"lazy\"" : "";
+    var cvAttr = f.content_vis ? " style=\"content-visibility:auto\"" : "";
+    var parts = prod.text.split(" - ");
+    var txt;
+    if (f.name_highlight && parts.length >= 2) {
+      txt = "<strong class=\"amy-name\">" + he(parts[0]) + "</strong><span class=\"amy-desc\">" + he(parts.slice(1).join(" - ")) + "</span>";
+    } else {
+      txt = he(prod.text);
+    }
+    var dividerHTML = !isH && f.divider ? "<hr class=\"amy-divider\" aria-hidden=\"true\">" : "";
+    var counterHTML = f.slide_counter ? "<span class=\"amy-counter\">" + pnum + "&thinsp;/&thinsp;" + n + "</span>" : "";
+    items += "<div class=\"amy-combo amy-c" + idx + "\"" + cvAttr + (isClone ? " aria-hidden=\"true\"" : "") + ">" + counterHTML;
+    if (isH) {
+      items += "<a href=\"" + link + "\" target=\"_blank\" rel=\"noopener noreferrer\"" + tabAttr + " class=\"amy-horiz\"><div class=\"amy-img-wrap\"><img src=\"" + img + "\" alt=\"" + alt + "\"" + lazyAttr + "></div><div class=\"amy-txt-wrap\"><p>" + txt + "</p></div></a>";
+    } else {
+      items += "<a href=\"" + link + "\" target=\"_blank\" rel=\"noopener noreferrer\"" + tabAttr + "><div class=\"amy-img-wrap\"><img src=\"" + img + "\" alt=\"" + alt + "\"" + lazyAttr + "></div>" + dividerHTML + "<div class=\"amy-txt-wrap\"><p>" + txt + "</p></div></a>";
+    }
+    items += "</div>\n";
+  }
+  var css = "<style>\n.amy-wrap{font-family:'Segoe UI',Arial,sans-serif;margin:0 auto;padding:10px 0 12px;width:" + bw + "px;max-width:100%;background:" + cWrapBg + "}\n.amy-title{text-align:center;margin-bottom:10px}\n.amy-title a{display:inline-block;font-size:" + fontTitle + ";font-weight:800;letter-spacing:" + titleSpacing + ";text-transform:uppercase;color:" + cTitle + ";text-decoration:none;padding:3px 12px;border-top:2px solid " + cTitle + ";border-bottom:2px solid " + cTitle + ";transition:color .3s,border-color .3s}\n.amy-title a:hover{color:" + cAccent + ";border-color:" + cAccent + "}\n.amy-rotator{position:relative;width:" + bw + "px;height:" + rotH + "px;overflow:hidden;border-radius:10px;" + bgCSS + "}\n" + borderCSS + "\n.amy-rotator:hover .amy-combo,.amy-rotator:hover .amy-dot,.amy-rotator:hover .amy-seg,.amy-rotator:hover .amy-seg-simple{animation-play-state:paused}\n.amy-combo{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:" + pad + "px;opacity:0;pointer-events:none;animation:amyFade " + cycle + "s infinite,amyPtr " + cycle + "s infinite;will-change:opacity,transform}\n@keyframes amyPtr{0%{pointer-events:none}" + pi + "%{pointer-events:auto}" + pv + "%{pointer-events:auto}" + po + "%,100%{pointer-events:none}}\n.amy-combo a{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;width:100%;height:100%}\n.amy-combo .amy-img-wrap{width:" + innerW + "px;height:" + imgH + "px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none}\n.amy-combo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.6));transition:transform .4s cubic-bezier(.25,.8,.25,1),filter .4s}\n" + hoverCSS + "\n.amy-combo .amy-txt-wrap{width:" + innerW + "px;height:" + textZH + "px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;pointer-events:none}\n.amy-divider{width:32px;height:2px;background:linear-gradient(90deg,transparent," + cBorder + ",transparent);margin:" + gap + "px auto;flex-shrink:0;border:none}\n.amy-combo p{font-size:" + fontBody + ";font-weight:600;line-height:1.35;text-align:center;color:" + cText + ";hyphens:auto;margin:0;word-break:break-word;overflow:hidden;width:100%;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}\n.amy-name{display:block;font-size:" + fontName + ";font-weight:800;color:" + cAccent + ";letter-spacing:.5px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;text-align:center}\n.amy-desc{display:block;font-weight:500;color:" + cText + ";opacity:.85;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}\n.amy-horiz{flex-direction:row!important;align-items:center;gap:" + gap + "px}\n.amy-horiz .amy-img-wrap{width:" + imgW + "px;height:" + imgH + "px;flex-shrink:0}\n.amy-horiz .amy-txt-wrap{flex:1;height:" + textZH + "px;align-items:flex-start}\n.amy-horiz p,.amy-horiz .amy-name{text-align:left}\n.amy-counter{position:absolute;top:7px;right:9px;font-size:10px;font-family:monospace;color:" + cAccent + "88;pointer-events:none;z-index:3}\n" + pauseCSS + "\n" + vignetteCSS + "\n" + scanCSS + "\n" + animKeyframes + "\n" + delays + ".amy-dots{display:flex;justify-content:center;gap:5px;margin-top:7px;height:7px}\n.amy-dot{width:6px;height:6px;border-radius:50%;background:rgba(128,128,128,.3);flex-shrink:0;animation:amyDot " + cycle + "s infinite}\n" + dotCSS + "\n.amy-pb{position:absolute;bottom:0;left:0;width:100%;height:4px;background:rgba(128,128,128,.18);z-index:6;pointer-events:none;overflow:hidden}\n.amy-seg{position:absolute;top:0;height:100%;transform-origin:left;border-radius:0 2px 2px 0}\n.amy-seg-simple{position:absolute;top:0;left:0;width:100%;height:100%;background:" + cProgress + ";transform-origin:left;border-radius:0 2px 2px 0;animation:amyPbSimple " + cycle + "s linear infinite}\n.amy-seg-g{left:0;width:55%;background:#27ae60;animation:amyPbGreen " + cycle + "s linear infinite}\n.amy-seg-y{left:55%;width:23%;background:#f39c12;animation:amyPbYellow " + cycle + "s linear infinite}\n.amy-seg-r{left:78%;width:22%;background:#e74c3c;animation:amyPbRed " + cycle + "s linear infinite,amyPbBright " + cycle + "s linear infinite}\n" + pbCSS + "\n</style>\n";
+  var titleHTML = showTitle ? "  <div class=\"amy-title\"><a href=\"" + heUrl(titleUrl) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + he(titleText) + "</a></div>\n" : "";
+  var html = "<div class=\"amy-wrap\">\n" + titleHTML + "  <div class=\"amy-rotator\">\n" + items + "    " + vignetteHTML + scanHTML + pauseHTML + pbHTML + "\n  </div>\n  " + dotHTML + "\n</div>\n" + (f.show_hr ? "<hr style=\"border:none;border-top:1px solid " + cHr + ";margin:10px auto 0;width:" + bw + "px;max-width:100%\">\n" : "");
+  var result = {
+    css: css,
+    html: html,
+    full: css + html,
+    bw: bw,
+    bh: bh,
+    isH: isH,
+    isN: isN,
+    rotH: rotH
+  };
+  return result;
+}
+var renderTimer = null;
+function scheduleRender() {
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(renderPreview, 80);
+}
+var _currentSlideIdx = 0;
+var _hoverResyncTimer = null;
+function renderPreview() {
+  readCfg();
+  var tmp = buildCarousel(PRODUCTS, cfg);
+  var tmp2 = 20;
+  var tmp3 = 20;
+  var liveFrameEl = document.getElementById("liveFrame");
+  liveFrameEl.setAttribute("scrolling", "no");
+  liveFrameEl.setAttribute("frameborder", "0");
+  liveFrameEl.width = tmp.bw + tmp2 * 2;
+  liveFrameEl.height = tmp.bh + 60 + tmp3 * 2;
+  _setFrameSrcdoc(liveFrameEl, tmp, _currentSlideIdx, tmp2, tmp3);
+  document.getElementById("dimInfo").textContent = tmp.bw + "×" + tmp.bh + " px";
+  var layoutBadgeEl = document.getElementById("layoutBadge");
+  layoutBadgeEl.textContent = tmp.isH ? t("layout_h") : tmp.isN ? t("layout_n") : t("layout_v");
+  layoutBadgeEl.className = "layout-badge " + (tmp.isH ? "lb-h" : tmp.isN ? "lb-n" : "lb-v");
+  var num = Math.min(60 / tmp.bw, 40 / tmp.bh);
+  var num2 = Math.max(6, Math.round(tmp.bw * num));
+  var num3 = Math.max(4, Math.round(tmp.bh * num));
+  var dimRectEl = document.getElementById("dimRect");
+  if (dimRectEl) {
+    dimRectEl.style.width = num2 + "px";
+    dimRectEl.style.height = num3 + "px";
+    dimRectEl.textContent = tmp.bw + "×" + tmp.bh;
+  }
+  document.getElementById("vW").textContent = tmp.bw;
+  document.getElementById("vH").textContent = tmp.bh;
+  document.getElementById("vSpeed").textContent = cfg.slide_speed + "sec";
+  document.querySelectorAll(".preset").forEach(function (el) {
+    el.classList.toggle("active", +el.dataset.w === tmp.bw && +el.dataset.h === tmp.bh);
+  });
+}
+// Inject carousel into the live preview iframe (animation resync)
+function _setFrameSrcdoc(frame, r, startIdx, padH, padV) {
+  var count = _buildSeq(PRODUCTS.length, cfg.slide_dir).length;
+  var num = Math.max(2, Math.min(10, cfg.slide_speed | 0));
+  var tmp = r.full;
+  if (count > 1 && startIdx > 0) {
+    var off = startIdx * num;
+    var total = count * num;
+    // Shift every slide/dot delay so the timeline starts at slot startIdx (order preserved)
+    tmp = tmp.replace(/\.amy-(c|dot-)(\d+)\{animation-delay:(-?[\d.]+)s\}/g, function (m, kind, k, d) {
+      var at = (((+d - off) % total) + total) % total; // time at which this element becomes visible
+      return ".amy-" + kind + k + "{animation-delay:" + (at === 0 ? 0 : -(total - at)) + "s}";
+    });
+    // Progress bar has no per-slide delay: shift its whole timeline by the same offset
+    tmp += "<style>.amy-seg-simple,.amy-seg-g,.amy-seg-y,.amy-seg-r{animation-delay:-" + off + "s}</style>";
+  }
+  frame.srcdoc = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style></head><body style=\"padding:" + padV + "px " + padH + "px;box-sizing:border-box\">" + tmp + "</body></html>";
+}
+function _attachHoverSync() {
+  var liveFrameEl = document.getElementById("liveFrame");
+  if (!liveFrameEl) {
+    return;
+  }
+  var tmp = liveFrameEl.parentElement;
+  tmp.addEventListener("mouseenter", function () {
+    var count = _buildSeq(PRODUCTS.length, cfg.slide_dir).length;
+    var num = Math.max(2, Math.min(10, cfg.slide_speed | 0));
+    if (!count) {
+      return;
+    }
+    var tmp2 = count * num * 1000;
+    var tmp3 = performance.now() % tmp2;
+    _currentSlideIdx = Math.floor(tmp3 / (num * 1000)) % count;
+  });
+  tmp.addEventListener("mouseleave", function () {
+    clearTimeout(_hoverResyncTimer);
+    _hoverResyncTimer = setTimeout(function () {
+      readCfg();
+      var tmp2 = buildCarousel(PRODUCTS, cfg);
+      var liveFrameEl2 = document.getElementById("liveFrame");
+      if (!liveFrameEl2) {
+        return;
+      }
+      _setFrameSrcdoc(liveFrameEl2, tmp2, _currentSlideIdx, 20, 20);
+    }, 50);
+  });
+}
+var saveTimer = null;
+var saveStatus = document.getElementById("saveStatus");
+function showStatus(msg, type) {
+  saveStatus.innerHTML = "<span class=\"save-dot\"></span>" + type;
+  saveStatus.className = "save-" + msg;
+  saveStatus.style.opacity = "1";
+  if (msg === "ok" || msg === "err") {
+    setTimeout(function () {
+      saveStatus.style.opacity = "0";
+    }, 2500);
+  }
+}
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  showStatus("saving", t("saving"));
+  saveTimer = setTimeout(doSave, 900);
+}
+function doSave() {
+  readCfg();
+  saveState();
+  showStatus("ok", t("saved"));
+}
+function downloadCarousel() {
+  readCfg();
+  var tmp = buildCarousel(PRODUCTS, cfg);
+  if (window.electronAPI) {
+    Promise.resolve().then(function () { return window.electronAPI.saveHtml(tmp.full); }).then(function (result) {
+      if (result && result.ok) {
+        showFlash(t("msg_saved_path") + result.path, "ok");
+      } else {
+        showFlash(t("msg_err") + (result && result.error ? result.error : "Save failed."), "err");
+      }
+    }).catch(function (err) {
+      showFlash(t("msg_err") + (err && err.message ? err.message : "Save failed."), "err");
+    });
+  } else {
+    var tmp2 = new Blob([tmp.full], {
+      type: "text/html"
+    });
+    var tmp3 = document.createElement("a");
+    var objectUrl = URL.createObjectURL(tmp2);
+    tmp3.href = objectUrl;
+    tmp3.download = "carousel_output.html";
+    tmp3.style.display = "none";
+    document.body.appendChild(tmp3);
+    tmp3.click();
+    tmp3.remove();
+    setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+  }
+}
+function copyHTML() {
+  readCfg();
+  var tmp = buildCarousel(PRODUCTS, cfg);
+  var copyBtnEl = document.getElementById("copyBtn");
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(tmp.full).then(function () {
+      copyBtnEl.textContent = t("msg_copied");
+      copyBtnEl.classList.add("copied");
+      setTimeout(function () {
+        copyBtnEl.textContent = t("btn_copy");
+        copyBtnEl.classList.remove("copied");
+      }, 2500);
+    }).catch(function () {
+      fallbackCopy(tmp.full, copyBtnEl);
+    });
+  } else {
+    fallbackCopy(tmp.full, copyBtnEl);
+  }
+}
+function fallbackCopy(text, btn) {
+  var tmp = document.createElement("textarea");
+  tmp.value = text;
+  tmp.style.position = "fixed";
+  tmp.style.opacity = "0";
+  document.body.appendChild(tmp);
+  tmp.select();
+  try {
+    document.execCommand("copy");
+    btn.textContent = t("msg_copied");
+    btn.classList.add("copied");
+    setTimeout(function () {
+      btn.textContent = t("btn_copy");
+      btn.classList.remove("copied");
+    }, 2500);
+  } catch (err) {
+    btn.textContent = t("msg_copy_err");
+  }
+  document.body.removeChild(tmp);
+}
+// Export products, flags, language and strings to JSON
+function exportData() {
+  readCfg();
+  var data = {
+    products: PRODUCTS,
+    flags: cfg,
+    lang: currentLang,
+    strings: customStrings
+  };
+  var tmp = data;
+  var tmp2 = JSON.stringify(tmp, null, 2);
+  if (window.electronAPI) {
+    Promise.resolve().then(function () { return window.electronAPI.saveJson(tmp2); }).then(function (result) {
+      if (result && result.ok) {
+        showFlash(t("msg_exported") + result.path, "ok");
+      } else {
+        showFlash(t("msg_err") + (result && result.error ? result.error : "Export failed."), "err");
+      }
+    }).catch(function (err) {
+      showFlash(t("msg_err") + (err && err.message ? err.message : "Export failed."), "err");
+    });
+  } else {
+    var tmp3 = new Blob([tmp2], {
+      type: "application/json"
+    });
+    var tmp4 = document.createElement("a");
+    var objectUrl = URL.createObjectURL(tmp3);
+    tmp4.href = objectUrl;
+    tmp4.download = "amycarousel_data.json";
+    tmp4.style.display = "none";
+    document.body.appendChild(tmp4);
+    tmp4.click();
+    tmp4.remove();
+    setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+  }
+}
+function importDataElectron() {
+  if (window.electronAPI) {
+    Promise.resolve().then(function () { return window.electronAPI.openJson(); }).then(function (result) {
+      if (!result || !result.ok) {
+        if (result && result.error) showFlash(t("msg_err") + result.error, "err");
+        return;
+      }
+      _importJson(result.content);
+    }).catch(function (err) {
+      showFlash(t("msg_err") + (err && err.message ? err.message : "Import failed."), "err");
+    });
+  } else {
+    document.getElementById("importFile").click();
+  }
+}
+function importDataFile(input) {
+  var tmp = input.files[0];
+  if (!tmp) {
+    return;
+  }
+  var tmp2 = new FileReader();
+  tmp2.onload = function (event) {
+    _importJson(event.target.result);
+  };
+  tmp2.readAsText(tmp);
+  input.value = "";
+}
+// Import JSON data and refresh the whole UI
+function _importJson(text) {
+  try {
+    var parsed = JSON.parse(text);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("The JSON root must be an object.");
+    var nextProducts = PRODUCTS;
+    var nextConfig = cfg;
+    var nextLang = currentLang;
+    var nextStrings = customStrings;
+    if (parsed.products !== undefined) {
+      var checkedProducts = normalizeProducts(parsed.products);
+      if (!checkedProducts.ok) throw new Error(checkedProducts.error);
+      nextProducts = checkedProducts.products;
+    }
+    if (parsed.flags !== undefined) nextConfig = normalizeConfig(parsed.flags);
+    if (parsed.lang !== undefined) {
+      if (parsed.lang !== "it" && parsed.lang !== "en") throw new Error("Unsupported language value.");
+      nextLang = parsed.lang;
+    }
+    if (parsed.strings !== undefined) nextStrings = normalizeStrings(parsed.strings);
+    PRODUCTS = nextProducts;
+    cfg = nextConfig;
+    currentLang = nextLang;
+    customStrings = nextStrings;
+    saveState();
+    buildColorGrid();
+    buildFlagGroups();
+    applyCfgToDOM();
+    buildProductList();
+    applyI18n();
+    buildLangEditor();
+    scheduleRender();
+    addHelpIconsToDynamic();
+    showFlash(t("msg_imported"), "ok");
+  } catch (err) {
+    showFlash(t("msg_invalid_json") + (err && err.message ? " — " + err.message : ""), "err");
+  }
+}
+function showFlash(msg, type) {
+  var flashMsgEl = document.getElementById("flashMsg");
+  flashMsgEl.textContent = msg;
+  flashMsgEl.className = "flash " + (type || "");
+  flashMsgEl.style.display = "block";
+  flashMsgEl.style.opacity = "1";
+  flashMsgEl.style.transition = "";
+  setTimeout(function () {
+    flashMsgEl.style.transition = "opacity .5s";
+    flashMsgEl.style.opacity = "0";
+    setTimeout(function () {
+      flashMsgEl.style.display = "none";
+    }, 500);
+  }, 3000);
+}
+function toggleSec(header) {
+  header.closest(".sec").classList.toggle("open");
+  scheduleSave();
+}
+function onSlider() {
+  scheduleRender();
+  scheduleSave();
+}
+function onFlag() {
+  scheduleRender();
+  scheduleSave();
+}
+function applyPreset(w, h) {
+  document.getElementById("sW").value = w;
+  document.getElementById("sH").value = h;
+  scheduleRender();
+  scheduleSave();
+}
+function refreshImgPrev(url) {
+  var imgPrevEl = document.getElementById("imgPrev");
+  var imgPrevPhEl = document.getElementById("imgPrevPh");
+  if (!url) {
+    imgPrevEl.style.display = "none";
+    imgPrevPhEl.style.display = "flex";
+    return;
+  }
+  imgPrevEl.onload = function () {
+    imgPrevEl.style.display = "block";
+    imgPrevPhEl.style.display = "none";
+  };
+  imgPrevEl.onerror = function () {
+    imgPrevEl.style.display = "none";
+    imgPrevPhEl.style.display = "flex";
+    imgPrevPhEl.textContent = "⚠️";
+  };
+  var safeUrl = normalizeHttpsImageUrl(url);
+  if (!safeUrl) {
+    imgPrevEl.style.display = "none";
+    imgPrevPhEl.style.display = "flex";
+    imgPrevPhEl.textContent = "⚠️";
+    return;
+  }
+  imgPrevEl.src = safeUrl;
+}
+function toggleWrapTransp(checkbox) {
+  var color_wrap_bg_cpEl = document.getElementById("color_wrap_bg_cp");
+  var color_wrap_bgEl = document.getElementById("color_wrap_bg");
+  color_wrap_bg_cpEl.disabled = checkbox;
+  color_wrap_bgEl.disabled = checkbox;
+  color_wrap_bgEl.value = checkbox ? "transparent" : color_wrap_bg_cpEl.value;
+  scheduleRender();
+  scheduleSave();
+}
+function syncWrapColor(el) {
+  document.getElementById("color_wrap_bg").value = el;
+  scheduleRender();
+  scheduleSave();
+}
+function syncColor(key, value) {
+  document.getElementById(key).value = value;
+  scheduleRender();
+  scheduleSave();
+}
+function syncPicker(key, value) {
+  if (/^#[0-9a-fA-F]{6}$/.test(value)) {
+    document.getElementById(key + "_cp").value = value;
+    scheduleRender();
+    scheduleSave();
+  }
+}
+var _tooltipEl = null;
+var _tooltipHideTimer = null;
+function showTooltip(el, ev) {
+  if (!_tooltipEl) {
+    _tooltipEl = document.getElementById("tooltipBox");
+  }
+  if (!_tooltipEl) {
+    return;
+  }
+  var value = el.getAttribute("data-help");
+  var tmp = t(value);
+  if (!tmp || tmp === value) {
+    return;
+  }
+  _tooltipEl.textContent = tmp;
+  clearTimeout(_tooltipHideTimer);
+  _tooltipEl.classList.remove("visible");
+  var tmp2 = el.getBoundingClientRect();
+  var num = Math.min(tmp2.left, window.innerWidth - 290);
+  var tmp3 = tmp2.bottom + 8;
+  if (tmp3 + 120 > window.innerHeight) {
+    tmp3 = tmp2.top - 130;
+  }
+  _tooltipEl.style.left = Math.max(8, num) + "px";
+  _tooltipEl.style.top = tmp3 + "px";
+  requestAnimationFrame(function () {
+    _tooltipEl.classList.add("visible");
+  });
+}
+function hideTooltip() {
+  if (!_tooltipEl) {
+    return;
+  }
+  _tooltipHideTimer = setTimeout(function () {
+    _tooltipEl.classList.remove("visible");
+  }, 120);
+}
+function _makeHelpIcon(key) {
+  var tmp = document.createElement("span");
+  tmp.className = "help-icon";
+  tmp.setAttribute("data-help", key);
+  tmp.textContent = "?";
+  tmp.addEventListener("mouseenter", function (arg) {
+    showTooltip(tmp, arg);
+  });
+  tmp.addEventListener("mouseleave", hideTooltip);
+  return tmp;
+}
+function addHelpIconsToDynamic() {
+  var data = {
+    flag_show_border: "help_show_border",
+    flag_show_hr: "help_show_hr",
+    flag_hover_zoom: "help_hover_zoom",
+    flag_slide_anim: "help_slide_anim",
+    flag_vignette: "help_vignette",
+    flag_scanlines: "help_scanlines",
+    flag_progress_bar: "help_progress_bar",
+    flag_pb_vu: "help_pb_vu",
+    flag_dot_nav: "help_dot_nav",
+    flag_slide_counter: "help_slide_counter",
+    flag_pause_icon: "help_pause_icon",
+    flag_name_highlight: "help_name_highlight",
+    flag_divider: "help_divider",
+    flag_lazy_load: "help_lazy_load",
+    flag_content_vis: "help_content_vis",
+    flag_show_title: "help_title_sec"
+  };
+  var data2 = {
+    color_bg1: "help_colors",
+    color_bg2: "help_colors",
+    color_border: "help_show_border",
+    color_accent: "help_colors",
+    color_text: "help_colors",
+    color_title: "help_title_sec",
+    color_progress: "help_progress_bar",
+    color_hr: "help_show_hr",
+    color_wrap_bg: "help_color_wrap"
+  };
+  Object.keys(data).forEach(function (item) {
+    var tmp = document.getElementById(item);
+    if (!tmp) {
+      return;
+    }
+    var tmp2 = tmp.closest(".flag-row");
+    if (!tmp2) {
+      return;
+    }
+    var tmp3 = tmp2.querySelector(".flag-lbl");
+    if (tmp3 && !tmp3.querySelector(".help-icon")) {
+      tmp3.appendChild(_makeHelpIcon(data[item]));
+    }
+  });
+  Object.keys(data2).forEach(function (item) {
+    var tmp = document.getElementById(item);
+    if (!tmp) {
+      return;
+    }
+    var tmp2 = tmp.closest(".color-row");
+    if (!tmp2) {
+      return;
+    }
+    var tmp3 = tmp2.querySelector(".color-lbl");
+    if (tmp3 && !tmp3.querySelector(".help-icon")) {
+      tmp3.appendChild(_makeHelpIcon(data2[item]));
+    }
+  });
+}
+document.getElementById("aboutBuild").textContent = APP_BUILD;
+loadState();
+buildPresets();
+buildColorGrid();
+buildFlagGroups();
+applyCfgToDOM();
+applyI18n();
+buildProductList();
+buildLangEditor();
+addHelpIconsToDynamic();
+renderPreview();
+_attachHoverSync();
+</script>
+
+</body>
+</html>
