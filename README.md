@@ -8,6 +8,10 @@ Build a rotating product banner in your browser (or as a standalone Windows app)
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
 ![Output](https://img.shields.io/badge/output-pure%20CSS-blue)
 
+![GUI](screenshots/GUI_1.PNG)
+![GUI](screenshots/GUI_2.PNG)
+![GUI](screenshots/GUI_3.PNG)
+
 <!-- Add a screenshot here, e.g. docs/screenshot.png:
 ![AMYCarousel screenshot](docs/screenshot.png)
 -->
